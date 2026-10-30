@@ -126,6 +126,7 @@
     align-items: center;
     position: relative;
   }
+  header[hidden] { display: none !important; }
   header::after {
     content: '';
     display: block;
@@ -223,7 +224,6 @@
     .teams-panel { grid-column: 3; grid-row: 1; }
   }
 
-  /* გვერდითი სვეტის დამალვისას ცენტრში გასწორება */
   body.hide-sidebar .layout {
     display: flex !important;
     justify-content: center !important;
@@ -338,7 +338,7 @@
   }
   .back-link:hover { text-decoration: underline; }
 
-  /* ---------- Merchandise / Hoodie Grid (გვერდიგვერდ) ---------- */
+  /* ---------- Merchandise / Hoodie Grid ---------- */
   .merch-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -776,7 +776,8 @@
     <a href="#stats">სტატისტიკა</a>
   </nav>
 
-  <header>
+  <!-- ჰედერი (ჩანს მხოლოდ მთავარ გვერდზე) -->
+  <header id="main-header">
     <div class="header-inner">
       <a class="hero-section" href="#home" aria-label="მთავარ გვერდზე დაბრუნება">
         <div class="owl-ring">
@@ -847,7 +848,7 @@
             </div>
             <!-- მერჩი -->
             <div class="merch-card">
-              <img src="merch.png.jpg" id="merch-img-element" alt="მერჩი" onerror="if(this.src.indexOf('.jpg')!==-1) this.src='merch.png';">
+              <img src="merch.png" id="merch-img-element" alt="მერჩი" onerror="this.onerror=null; this.src='merch.png.jpg';">
               <h3>მერჩი</h3>
               <div class="merch-price">50₾</div>
               <button type="button" class="btn-reg btn-submit" onclick="openProductModal('merch')">ყიდვა</button>
@@ -1037,6 +1038,12 @@ function route() {
   var isReg = h === '#register';
   var isHoodie = h === '#hoodie';
   var isHome = !isReg && !isHoodie;
+
+  /* ჰედერის (ლოგო, მწვანე ზოლი) გამოჩენა/დამალვა */
+  var mainHeader = document.getElementById('main-header');
+  if (mainHeader) {
+    mainHeader.hidden = !isHome;
+  }
 
   document.getElementById('view-home').hidden = !isHome;
   document.getElementById('view-register').hidden = !isReg;
