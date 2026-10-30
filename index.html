@@ -50,7 +50,7 @@
   .page-frame::before { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
   .page-frame::after  { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
 
-  /* ---------- მცურავი მრგვალი ღილაკი მარცხნივ ---------- */
+  /* ---------- მცურავი ღილაკი ---------- */
   .floating-hoodie-btn {
     position: fixed;
     left: 20px;
@@ -124,7 +124,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0;
     position: relative;
   }
   header::after {
@@ -200,7 +199,7 @@
     margin-top: -8px;
   }
 
-  /* ---------- Layout ---------- */
+  /* ---------- Layout & ცენტრირება ---------- */
   .layout {
     flex: 1;
     width: 100%;
@@ -212,13 +211,6 @@
     gap: 36px;
     align-items: start;
   }
-  body.hide-sidebar .layout {
-    grid-template-columns: minmax(0, 1fr) !important;
-  }
-  body.hide-sidebar .teams-panel {
-    display: none !important;
-  }
-
   @media (min-width: 1240px) {
     .layout {
       max-width: none;
@@ -230,6 +222,22 @@
     main { grid-column: 2; grid-row: 1; }
     .teams-panel { grid-column: 3; grid-row: 1; }
   }
+
+  /* გვერდითი სვეტის დამალვისას ცენტრში გასწორება */
+  body.hide-sidebar .layout {
+    display: flex !important;
+    justify-content: center !important;
+  }
+  body.hide-sidebar main {
+    grid-column: auto !important;
+    width: 100% !important;
+    max-width: 860px !important;
+    margin: 0 auto !important;
+  }
+  body.hide-sidebar .teams-panel {
+    display: none !important;
+  }
+
   main {
     min-width: 0;
     padding: 48px 0 56px;
@@ -315,23 +323,6 @@
   }
   .winners-empty .w-icon { font-size: 2.2rem; margin-bottom: 8px; }
   .winners-empty p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; }
-  .winners-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-  }
-  .winner-card {
-    border: 1px solid rgba(26,92,42,0.15);
-    border-top: 3px solid var(--gold);
-    background: var(--off-white);
-    border-radius: 4px;
-    padding: 22px 20px;
-    text-align: center;
-  }
-  .winner-card .w-medal { font-size: 2rem; margin-bottom: 4px; }
-  .winner-card .w-year { font-size: 0.78rem; font-weight: 600; color: var(--text-light); letter-spacing: 0.08em; }
-  .winner-card .w-team { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--green); margin: 6px 0 4px; overflow-wrap: anywhere; }
-  .winner-card .w-score { font-size: 0.85rem; color: var(--text-mid); }
 
   /* ---------- Back link ---------- */
   .back-link {
@@ -347,11 +338,18 @@
   }
   .back-link:hover { text-decoration: underline; }
 
-  /* ---------- Merchandise / Hoodie Grid ---------- */
+  /* ---------- Merchandise / Hoodie Grid (გვერდიგვერდ) ---------- */
   .merch-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  @media (max-width: 600px) {
+    .merch-grid {
+      grid-template-columns: 1fr;
+    }
   }
   .merch-card {
     background: var(--white);
@@ -368,7 +366,7 @@
   }
   .merch-card img {
     width: 100%;
-    max-height: 240px;
+    height: 220px;
     object-fit: contain;
     border-radius: 4px;
     margin-bottom: 14px;
@@ -628,7 +626,7 @@
   .team-summary-title { font-size: 0.72rem; font-weight: 600; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
   .team-member-row { font-size: 0.85rem; color: var(--text-mid); padding: 5px 0; border-bottom: 1px solid rgba(26,92,42,0.07); }
 
-  /* ---------- Side column: registered teams ---------- */
+  /* ---------- Side column ---------- */
   .teams-panel {
     position: sticky;
     top: 64px;
@@ -702,7 +700,7 @@
     100% { box-shadow: 0 0 0 0 rgba(47,178,90,0); }
   }
 
-  /* Modal window for Hoodie / Merch */
+  /* Modal window */
   .hoodie-overlay {
     position: fixed; inset: 0; z-index: 100;
     background: rgba(10,30,15,0.6);
@@ -849,7 +847,7 @@
             </div>
             <!-- მერჩი -->
             <div class="merch-card">
-              <img src="merch.png" alt="მერჩი">
+              <img src="merch.png.jpg" id="merch-img-element" alt="მერჩი" onerror="if(this.src.indexOf('.jpg')!==-1) this.src='merch.png';">
               <h3>მერჩი</h3>
               <div class="merch-price">50₾</div>
               <button type="button" class="btn-reg btn-submit" onclick="openProductModal('merch')">ყიდვა</button>
@@ -962,7 +960,7 @@
       </div>
     </main>
 
-    <!-- ===================== გვერდითი სვეტი: ჩანს მხოლოდ მთავარ გვერდზე ===================== -->
+    <!-- ===================== გვერდითი სვეტი ===================== -->
     <aside class="teams-panel" aria-label="დარეგისტრირებული გუნდები">
       <div class="teams-head">
         <div class="teams-title">დარეგისტრირებული გუნდები</div>
@@ -1034,7 +1032,6 @@ function el(tag, cls, text) {
   return n;
 }
 
-/* ---------- მარშრუტიზაცია & გვერდითი სვეტის მართვა ---------- */
 function route() {
   var h = location.hash;
   var isReg = h === '#register';
@@ -1045,7 +1042,6 @@ function route() {
   document.getElementById('view-register').hidden = !isReg;
   document.getElementById('view-hoodie').hidden = !isHoodie;
 
-  /* დარეგისტრირებული გუნდების სვეტი ჩანდეს მხოლოდ მთავარ გვერდზე */
   if (isHome) {
     document.body.classList.remove('hide-sidebar');
   } else {
@@ -1072,7 +1068,6 @@ function route() {
 }
 window.addEventListener('hashchange', route);
 
-/* ---------- სტატისტიკა ---------- */
 function renderWinners() {
   var box = document.getElementById('winners-box');
   box.textContent = '';
@@ -1085,7 +1080,6 @@ function renderWinners() {
   }
 }
 
-/* ---------- გუნდების სია ---------- */
 var serverTeams = [];
 var localTeams = [];
 var teamsStatus = 'loading';
@@ -1144,7 +1138,6 @@ function addLocalTeam(name) {
   renderTeams();
 }
 
-/* ---------- რეგისტრაცია ---------- */
 function buildMembersForm() {
   var container = document.getElementById('members-container');
   container.innerHTML = '';
@@ -1262,7 +1255,6 @@ function copyIBAN() {
   });
 }
 
-/* ---------- პროდუქტების (ჰუდი / მერჩი) მოდალური ფანჯარა ---------- */
 var currentProduct = 'hoodie';
 var hoodieSize = null;
 
@@ -1275,7 +1267,7 @@ function openProductModal(prod) {
 
   if (prod === 'merch') {
     document.getElementById('modal-title').textContent = 'მერჩი';
-    document.getElementById('modal-img').src = 'merch.png';
+    document.getElementById('modal-img').src = document.getElementById('merch-img-element').src;
     document.getElementById('modal-price').textContent = 'ფასი: 50₾';
     document.getElementById('pay-price-label').textContent = '50₾';
     document.getElementById('pay-prod-label').textContent = 'მერჩი';
@@ -1333,7 +1325,6 @@ document.getElementById('hoodie-overlay').addEventListener('click', function (e)
 });
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeHoodie(); });
 
-/* ---------- გაშვება ---------- */
 buildMembersForm();
 renderWinners();
 route();
