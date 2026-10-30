@@ -17,10 +17,8 @@
     --text-mid: #3a3a3a;
     --text-light: #6a6a6a;
   }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { font-size: 16px; scroll-behavior: smooth; }
-
   body {
     background: var(--off-white);
     font-family: 'Fira Sans', sans-serif;
@@ -28,7 +26,6 @@
     min-height: 100vh;
     padding: 12px;
   }
-
   .page-frame {
     min-height: calc(100vh - 24px);
     border: 4px solid var(--green);
@@ -38,10 +35,9 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    overflow: clip; /* clip (not hidden), so the side column and top nav can stay sticky */
+    overflow: clip;
     position: relative;
   }
-
   .page-frame::before,
   .page-frame::after {
     content: '';
@@ -53,6 +49,41 @@
   }
   .page-frame::before { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
   .page-frame::after  { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
+
+  /* ---------- მცურავი მრგვალი ღილაკი მარცხნივ ---------- */
+  .floating-hoodie-btn {
+    position: fixed;
+    left: 20px;
+    bottom: 30px;
+    z-index: 99;
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    background: var(--white);
+    color: #000000;
+    border: 3px solid var(--green);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    line-height: 1.2;
+    padding: 8px;
+    transition: transform 0.25s, box-shadow 0.25s;
+    animation: pulseFloat 3s ease-in-out infinite;
+  }
+  .floating-hoodie-btn:hover {
+    transform: scale(1.08) translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+  }
+  @keyframes pulseFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
 
   /* ---------- ზედა ნავიგაცია ---------- */
   .top-nav {
@@ -85,7 +116,7 @@
     outline: none;
   }
   #about, #stats { scroll-margin-top: 70px; }
-  #signup { scroll-margin-top: 30vh; } /* ღილაკი ეკრანის შუაში მოხვდება */
+  #signup { scroll-margin-top: 30vh; }
 
   header {
     background: var(--green);
@@ -96,7 +127,6 @@
     gap: 0;
     position: relative;
   }
-
   header::after {
     content: '';
     display: block;
@@ -104,7 +134,6 @@
     height: 6px;
     background: linear-gradient(90deg, var(--green) 0%, var(--gold) 30%, var(--gold-light) 50%, var(--gold) 70%, var(--green) 100%);
   }
-
   .header-inner {
     display: flex;
     flex-direction: column;
@@ -113,7 +142,6 @@
     width: 100%;
     max-width: 900px;
   }
-
   .hero-section {
     display: flex;
     flex-direction: column;
@@ -123,8 +151,6 @@
     text-decoration: none;
     color: inherit;
   }
-
-  /* მრგვალი ლოგო */
   .owl-ring {
     width: 190px;
     height: 190px;
@@ -147,12 +173,10 @@
     display: block;
   }
   .owl-ring.no-logo::before { content: '\1F989'; font-size: 5rem; }
-
   @keyframes float {
     0%,100% { transform: translateY(0); }
     50%      { transform: translateY(-6px); }
   }
-
   .event-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(1.5rem, 5vw, 2.6rem);
@@ -163,7 +187,6 @@
     line-height: 1.2;
     text-shadow: 0 2px 12px rgba(0,0,0,0.3);
   }
-
   .year-badge {
     display: inline-block;
     background: linear-gradient(135deg, var(--gold), var(--gold-light));
@@ -177,7 +200,7 @@
     margin-top: -8px;
   }
 
-  /* ---------- Layout: content + side column ---------- */
+  /* ---------- Layout ---------- */
   .layout {
     flex: 1;
     width: 100%;
@@ -189,9 +212,13 @@
     gap: 36px;
     align-items: start;
   }
+  body.hide-sidebar .layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  body.hide-sidebar .teams-panel {
+    display: none !important;
+  }
 
-  /* ფართო ეკრანზე: ძირითადი ნაწილი გვერდის ცენტრშია (გვერდებთან სიმეტრიული),
-     გუნდების სია კი მარჯვენა კიდესთან */
   @media (min-width: 1240px) {
     .layout {
       max-width: none;
@@ -203,19 +230,16 @@
     main { grid-column: 2; grid-row: 1; }
     .teams-panel { grid-column: 3; grid-row: 1; }
   }
-
   main {
     min-width: 0;
     padding: 48px 0 56px;
   }
-
   .view {
     display: flex;
     flex-direction: column;
     gap: 48px;
   }
   .view[hidden] { display: none; }
-
   .section-label {
     display: flex;
     align-items: center;
@@ -233,7 +257,7 @@
     text-align: center;
   }
 
-  /* ---------- საინფორმაციო ველი: ერთიანი ფანჯარა ---------- */
+  /* ---------- საინფორმაციო ველი ---------- */
   .about-panel {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -252,7 +276,6 @@
   }
   .about-item + .about-item { border-left: 1px solid rgba(26,92,42,0.12); }
   .about-item p { font-size: 0.95rem; color: var(--text-mid); line-height: 1.7; }
-
   @media (max-width: 720px) {
     .about-panel { grid-template-columns: 1fr; }
     .about-item + .about-item { border-left: none; border-top: 1px solid rgba(26,92,42,0.12); }
@@ -281,8 +304,6 @@
     transform: translateY(-3px);
     box-shadow: 0 14px 32px rgba(212,160,23,0.45), inset 0 -3px 0 rgba(26,92,42,0.18);
   }
-  .cta-btn:active { transform: translateY(0); }
-  .cta-btn:focus-visible { outline: 3px solid var(--green); outline-offset: 4px; }
 
   /* ---------- Winners ---------- */
   .winners-empty {
@@ -312,7 +333,7 @@
   .winner-card .w-team { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--green); margin: 6px 0 4px; overflow-wrap: anywhere; }
   .winner-card .w-score { font-size: 0.85rem; color: var(--text-mid); }
 
-  /* ---------- Back link (registration page) ---------- */
+  /* ---------- Back link ---------- */
   .back-link {
     display: inline-flex;
     align-items: center;
@@ -326,6 +347,47 @@
   }
   .back-link:hover { text-decoration: underline; }
 
+  /* ---------- Merchandise / Hoodie Grid ---------- */
+  .merch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .merch-card {
+    background: var(--white);
+    border: 1px solid rgba(26,92,42,0.15);
+    border-top: 3px solid var(--gold);
+    border-radius: 6px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(26,92,42,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .merch-card img {
+    width: 100%;
+    max-height: 240px;
+    object-fit: contain;
+    border-radius: 4px;
+    margin-bottom: 14px;
+    background: #f1f1ef;
+  }
+  .merch-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 6px;
+  }
+  .merch-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
   /* ---------- Payment ---------- */
   .payment-box {
     background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
@@ -334,16 +396,6 @@
     color: var(--white);
     position: relative;
     overflow: hidden;
-  }
-  .payment-box::before {
-    content: '\20BE';
-    position: absolute;
-    right: -10px; top: -20px;
-    font-size: 160px;
-    font-family: 'Cormorant Garamond', serif;
-    opacity: 0.06;
-    line-height: 1;
-    pointer-events: none;
   }
   .payment-box .pay-section-label {
     font-size: 0.7rem;
@@ -399,7 +451,6 @@
     padding-top: 16px;
   }
   .instruction-text strong { color: var(--gold-light); font-weight: 600; }
-
   .copy-btn {
     display: inline-flex;
     align-items: center;
@@ -418,7 +469,6 @@
     transition: background 0.2s, transform 0.1s;
   }
   .copy-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
-  .copy-btn:active { transform: translateY(0); }
   .copy-btn.copied { background: #4caf6a; color: white; }
 
   footer {
@@ -452,7 +502,6 @@
     color: rgba(255,255,255,0.5);
     letter-spacing: 0.06em;
     border-right: 1px solid rgba(255,255,255,0.1);
-    position: relative;
     transition: all 0.3s;
   }
   .reg-step-indicator:last-child { border-right: none; }
@@ -499,7 +548,6 @@
     font-size: 0.88rem;
     color: var(--text-dark);
     background: white;
-    transition: border-color 0.2s, box-shadow 0.2s;
     outline: none;
   }
   .field-group input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(26,92,42,0.08); }
@@ -531,7 +579,6 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 0.7rem;
     font-weight: 700;
-    flex-shrink: 0;
   }
   .reg-nav {
     display: flex;
@@ -553,15 +600,10 @@
     cursor: pointer;
     border: none;
     transition: all 0.2s;
-    letter-spacing: 0.03em;
   }
   .btn-next { background: var(--green); color: white; }
-  .btn-next:hover { background: var(--green-mid); transform: translateY(-1px); }
   .btn-back { background: transparent; color: var(--text-light); border: 1px solid rgba(26,92,42,0.2) !important; }
-  .btn-back:hover { color: var(--green); border-color: var(--green) !important; }
   .btn-submit { background: var(--gold); color: var(--green); }
-  .btn-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
-  .btn-submit:disabled { opacity: 0.7; cursor: default; transform: none; }
 
   .reg-error {
     margin-top: 16px;
@@ -570,11 +612,8 @@
     background: rgba(192,57,43,0.07);
     color: #8e2b20;
     font-size: 0.85rem;
-    line-height: 1.5;
-    border-radius: 3px;
   }
   .reg-error[hidden] { display: none; }
-
   .reg-success { display: none; text-align: center; padding: 48px 32px; }
   .reg-success .success-icon {
     width: 64px; height: 64px;
@@ -585,17 +624,14 @@
     font-size: 1.8rem;
   }
   .reg-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--green); margin-bottom: 10px; }
-  .reg-success p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; }
   .team-summary { background: var(--off-white); border: 1px solid rgba(26,92,42,0.15); border-radius: 6px; padding: 20px 24px; margin-top: 20px; text-align: left; }
   .team-summary-title { font-size: 0.72rem; font-weight: 600; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
   .team-member-row { font-size: 0.85rem; color: var(--text-mid); padding: 5px 0; border-bottom: 1px solid rgba(26,92,42,0.07); }
-  .team-member-row:last-child { border-bottom: none; }
-  .team-member-row strong { color: var(--green); }
 
   /* ---------- Side column: registered teams ---------- */
   .teams-panel {
     position: sticky;
-    top: 64px; /* ნავიგაციის ქვემოთ */
+    top: 64px;
     margin: 48px 0 56px;
     background: var(--white);
     border: 1px solid rgba(26,92,42,0.15);
@@ -617,22 +653,16 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1rem;
     font-weight: 600;
-    letter-spacing: 0.03em;
-    line-height: 1.25;
   }
   .teams-count {
-    min-width: 28px;
-    height: 28px;
+    min-width: 28px; height: 28px;
     padding: 0 8px;
     border-radius: 14px;
     background: var(--gold);
     color: var(--green);
     font-weight: 700;
     font-size: 0.82rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
   }
   .teams-list {
     list-style: none;
@@ -647,9 +677,7 @@
     padding: 9px 16px;
     border-bottom: 1px solid rgba(26,92,42,0.07);
     font-size: 0.86rem;
-    color: var(--text-mid);
   }
-  .team-item:last-child { border-bottom: none; }
   .team-num {
     width: 22px; height: 22px;
     border-radius: 50%;
@@ -658,84 +686,23 @@
     font-size: 0.68rem;
     font-weight: 700;
     display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
   }
-  .team-name { min-width: 0; overflow-wrap: anywhere; line-height: 1.35; }
-  .team-item.is-new { animation: teamIn 1.8s ease-out; }
-  @keyframes teamIn {
-    0%   { background: rgba(240,192,64,0.55); opacity: 0; transform: translateX(10px); }
-    20%  { opacity: 1; transform: none; }
-    100% { background: transparent; }
-  }
-  .teams-empty { padding: 22px 16px; text-align: center; font-size: 0.82rem; color: var(--text-light); line-height: 1.5; }
+  .teams-empty { padding: 22px 16px; text-align: center; font-size: 0.82rem; color: var(--text-light); }
   .teams-foot {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 10px 16px;
-    font-size: 0.72rem;
-    color: var(--text-light);
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; padding: 10px 16px;
+    font-size: 0.72rem; color: var(--text-light);
     background: var(--off-white);
     border-top: 1px solid rgba(26,92,42,0.1);
   }
   .live-dot { width: 8px; height: 8px; border-radius: 50%; background: #2fb25a; animation: livePulse 2s infinite; }
   @keyframes livePulse {
-    0%   { box-shadow: 0 0 0 0 rgba(47,178,90,0.5); }
-    70%  { box-shadow: 0 0 0 7px rgba(47,178,90,0); }
+    0% { box-shadow: 0 0 0 0 rgba(47,178,90,0.5); }
+    70% { box-shadow: 0 0 0 7px rgba(47,178,90,0); }
     100% { box-shadow: 0 0 0 0 rgba(47,178,90,0); }
   }
 
-  @media (max-width: 960px) {
-    .layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 0 28px; }
-    main { padding-bottom: 40px; }
-    .teams-panel { position: static; margin: 0 0 40px; }
-    .teams-list { max-height: 300px; }
-  }
-
-  @media (max-width: 600px) {
-    body { padding: 8px; }
-    .top-nav { gap: 2px 16px; padding: 8px 10px; }
-    .top-nav a { font-size: 0.78rem; }
-    header { padding: 24px 16px 20px; }
-    .layout { padding: 0 20px; }
-    main { padding: 32px 0 32px; }
-    .view { gap: 36px; }
-    .cta-btn { width: 100%; padding: 22px 24px; font-size: 1.2rem; }
-    .payment-box { padding: 28px 22px; }
-    .owl-ring { width: 140px; height: 140px; }
-    .field-row { grid-template-columns: 1fr; }
-    .reg-body { padding: 24px 18px 20px; }
-    .reg-step-indicator { font-size: 0.65rem; padding: 10px 4px; }
-  }
-
-
-  /* ---------- შავი ჰუდი ---------- */
-  #hoodie-teaser { scroll-margin-top: 70px; }
-  .hoodie-frame {
-    display: block;
-    width: 100%;
-    max-width: 380px;
-    margin: 0 auto;
-    padding: 10px;
-    background: var(--white);
-    border: 4px solid var(--green);
-    outline: 2px solid var(--gold);
-    outline-offset: -10px;
-    border-radius: 6px;
-    box-shadow: 0 10px 28px rgba(26,92,42,0.15);
-    cursor: pointer;
-    font: inherit;
-    text-decoration: none;
-    transition: transform 0.25s, box-shadow 0.25s;
-  }
-  .hoodie-frame:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(26,92,42,0.22); }
-  .hoodie-frame:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
-  .hoodie-frame img { width: 100%; height: auto; display: block; border-radius: 2px; background: #f1f1ef; }
-  .hoodie-caption { text-align: center; margin-top: 18px; }
-  .hoodie-hint { font-size: 0.85rem; color: var(--text-light); }
-  .hoodie-price-small { margin-top: 6px; font-size: 0.95rem; font-weight: 600; color: var(--green); letter-spacing: 0.04em; }
-
+  /* Modal window for Hoodie / Merch */
   .hoodie-overlay {
     position: fixed; inset: 0; z-index: 100;
     background: rgba(10,30,15,0.6);
@@ -743,7 +710,6 @@
     padding: 16px;
     opacity: 0; visibility: hidden;
     transition: opacity 0.25s, visibility 0.25s;
-    overflow-y: auto;
   }
   .hoodie-overlay.open { opacity: 1; visibility: visible; }
   .hoodie-modal {
@@ -753,20 +719,16 @@
     background: var(--white);
     border-top: 4px solid var(--gold);
     border-radius: 8px;
-    padding: 28px 28px 22px;
+    padding: 28px;
     box-shadow: 0 24px 60px rgba(0,0,0,0.35);
-    transform: translateY(16px) scale(0.96);
-    transition: transform 0.25s;
   }
-  .hoodie-overlay.open .hoodie-modal { transform: none; }
   .hoodie-close {
     position: absolute; top: 10px; right: 12px;
     width: 34px; height: 34px;
     border: none; background: transparent;
-    font-size: 1.6rem; line-height: 1; color: var(--text-light);
-    cursor: pointer; border-radius: 50%;
+    font-size: 1.6rem; color: var(--text-light);
+    cursor: pointer;
   }
-  .hoodie-close:hover { color: var(--green); background: rgba(26,92,42,0.08); }
   .hoodie-modal-img {
     display: block; width: 150px; height: auto;
     margin: 0 auto 14px;
@@ -777,53 +739,42 @@
     font-size: 1.5rem; font-weight: 700; color: var(--green);
     text-align: center; margin-bottom: 4px;
   }
-  .hoodie-modal .hm-sub { text-align: center; font-size: 0.82rem; color: var(--text-light); margin-bottom: 18px; }
-  .size-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 8px; }
+  .size-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 12px 0; }
   .size-btn {
-    min-width: 56px; padding: 11px 14px;
+    min-width: 48px; padding: 8px 12px;
     font-family: 'Fira Sans', sans-serif; font-weight: 600; font-size: 0.9rem;
     color: var(--green); background: var(--white);
     border: 1.5px solid rgba(26,92,42,0.3); border-radius: 4px;
-    cursor: pointer; transition: all 0.15s;
+    cursor: pointer;
   }
-  .size-btn:hover { border-color: var(--green); }
   .size-btn.selected { background: var(--green); color: var(--gold-light); border-color: var(--green); }
-  .size-error { min-height: 18px; text-align: center; font-size: 0.8rem; color: #c0392b; margin-bottom: 6px; }
+  .size-error { min-height: 18px; text-align: center; font-size: 0.8rem; color: #c0392b; }
   .hoodie-buy-row {
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
     padding-top: 16px; border-top: 1px solid rgba(26,92,42,0.12);
   }
   .hoodie-buy-price { font-size: 0.95rem; font-weight: 600; color: var(--green); }
   .hoodie-pay { display: none; }
-  .hoodie-pay .pay-note { font-size: 0.85rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 14px; text-align: center; }
-  .hoodie-pay .iban-block { background: var(--off-white); border: 1px solid rgba(26,92,42,0.2); border-left: 4px solid var(--gold); margin-top: 0; }
-  .hoodie-pay .iban-label { color: var(--green); }
-  .hoodie-pay .iban-value { color: var(--text-dark); }
-  .hoodie-pay .copy-btn { margin-top: 14px; }
-  .hoodie-pay .pay-recipe { font-size: 0.82rem; color: var(--text-mid); line-height: 1.6; margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(26,92,42,0.12); }
-  .hoodie-pay .pay-recipe strong { color: var(--green); }
   .hoodie-modal.paying .hoodie-choose { display: none; }
   .hoodie-modal.paying .hoodie-pay { display: block; }
   body.modal-open { overflow: hidden; }
 
-  @media (max-width: 600px) {
-    .hoodie-modal { padding: 24px 18px 18px; }
-    .hoodie-modal-img { width: 120px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .owl-ring, .live-dot, .team-item.is-new { animation: none; }
-    html { scroll-behavior: auto; }
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 0 28px; }
+    .teams-panel { position: static; margin: 0 0 40px; }
   }
 </style>
 </head>
 <body>
-<div class="page-frame">
 
+<!-- მარცხენა მცურავი ღილაკი -->
+<a class="floating-hoodie-btn" href="#hoodie">შავი<br>ჰუდი</a>
+
+<div class="page-frame">
   <nav class="top-nav" aria-label="ნავიგაცია">
     <a href="#about">ჩემპიონატის შესახებ</a>
     <a href="#signup">რეგისტრაცია</a>
-    <a href="#hoodie">შავი ჰუდი</a>
+    <a href="#hoodie">შავი ჰუდი / მერჩი</a>
     <a href="#stats">სტატისტიკა</a>
   </nav>
 
@@ -841,10 +792,8 @@
 
   <div class="layout">
     <main>
-
       <!-- ===================== მთავარი გვერდი ===================== -->
       <div class="view" id="view-home">
-
         <section id="about">
           <div class="section-label">
             <div class="line"></div>
@@ -868,21 +817,6 @@
           <a class="cta-btn" href="#register">დარეგისტრირდი</a>
         </section>
 
-        <section id="hoodie-teaser">
-          <div class="section-label">
-            <div class="line"></div>
-            <h2>შავი ჰუდი</h2>
-            <div class="line rev"></div>
-          </div>
-          <a class="hoodie-frame" href="#hoodie" aria-label="შავი ჰუდი — გახსნა">
-            <img src="hoodie.png" alt="შავი ჰუდი">
-          </a>
-          <div class="hoodie-caption">
-            <div class="hoodie-hint">დააჭირეთ დეტალებისთვის</div>
-            <div class="hoodie-price-small">30₾</div>
-          </div>
-        </section>
-
         <section id="stats">
           <div class="section-label">
             <div class="line"></div>
@@ -891,49 +825,51 @@
           </div>
           <div id="winners-box"></div>
         </section>
-
       </div>
 
-      <!-- ===================== შავი ჰუდის გვერდი ===================== -->
+      <!-- ===================== ჰუდი და მერჩის გვერდი ===================== -->
       <div class="view" id="view-hoodie" hidden>
-
         <a class="back-link" href="#home">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           მთავარ გვერდზე
         </a>
-
         <section>
           <div class="section-label">
             <div class="line"></div>
-            <h2>შავი ჰუდი</h2>
+            <h2>შავი ჰუდი &amp; მერჩი</h2>
             <div class="line rev"></div>
           </div>
-          <button type="button" class="hoodie-frame" onclick="openHoodie()" aria-label="შავი ჰუდი — ყიდვა">
-            <img src="hoodie.png" alt="შავი ჰუდი">
-          </button>
-          <div class="hoodie-caption">
-            <div class="hoodie-hint">დააჭირეთ ფოტოს ზომის ასარჩევად და საყიდლად</div>
-            <div class="hoodie-price-small">30₾</div>
+          <div class="merch-grid">
+            <!-- შავი ჰუდი -->
+            <div class="merch-card">
+              <img src="hoodie.png" alt="შავი ჰუდი">
+              <h3>შავი ჰუდი</h3>
+              <div class="merch-price">40₾</div>
+              <button type="button" class="btn-reg btn-submit" onclick="openProductModal('hoodie')">ყიდვა</button>
+            </div>
+            <!-- მერჩი -->
+            <div class="merch-card">
+              <img src="merch.png" alt="მერჩი">
+              <h3>მერჩი</h3>
+              <div class="merch-price">50₾</div>
+              <button type="button" class="btn-reg btn-submit" onclick="openProductModal('merch')">ყიდვა</button>
+            </div>
           </div>
         </section>
-
       </div>
 
       <!-- ===================== სარეგისტრაციო გვერდი ===================== -->
       <div class="view" id="view-register" hidden>
-
         <a class="back-link" href="#home">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           მთავარ გვერდზე
         </a>
-
         <section>
           <div class="section-label">
             <div class="line"></div>
             <h2>გუნდის რეგისტრაცია</h2>
             <div class="line rev"></div>
           </div>
-
           <div class="reg-form-wrap">
             <div class="reg-progress">
               <div class="reg-step-indicator active" id="ind-1"><span class="step-num">1</span>კაპიტანი</div>
@@ -971,7 +907,6 @@
                   <button class="btn-reg btn-next" onclick="goStep(2)">შემდეგი <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
                 </div>
               </div>
-
               <div class="reg-step" id="step-2">
                 <div class="reg-step-title">გუნდის წევრები</div>
                 <div class="reg-step-sub">შეიყვანეთ დარჩენილი 5 მონაწილის სახელი და გვარი (კაპიტნის ჩათვლით — 6 წევრი)</div>
@@ -981,7 +916,6 @@
                   <button class="btn-reg btn-next" onclick="goStep(3)">შემდეგი <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
                 </div>
               </div>
-
               <div class="reg-step" id="step-3">
                 <div class="reg-step-title">დადასტურება</div>
                 <div class="reg-step-sub">გადაამოწმეთ ინფორმაცია და დაადასტურეთ რეგისტრაცია</div>
@@ -992,7 +926,6 @@
                   <button class="btn-reg btn-submit" onclick="submitReg()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> დარეგისტრირება</button>
                 </div>
               </div>
-
               <div class="reg-success" id="reg-success">
                 <div class="success-icon">🏆</div>
                 <h3>რეგისტრაცია დასრულდა!</h3>
@@ -1002,7 +935,6 @@
             </div>
           </div>
         </section>
-
         <section>
           <div class="section-label">
             <div class="line"></div>
@@ -1027,11 +959,10 @@
             <div class="instruction-text"><strong>მნიშვნელოვანი:</strong> გადახდის დანიშნულებაში მიუთითეთ გუნდის სახელი.</div>
           </div>
         </section>
-
       </div>
     </main>
 
-    <!-- ===================== გვერდითი სვეტი: დარეგისტრირებული გუნდები ===================== -->
+    <!-- ===================== გვერდითი სვეტი: ჩანს მხოლოდ მთავარ გვერდზე ===================== -->
     <aside class="teams-panel" aria-label="დარეგისტრირებული გუნდები">
       <div class="teams-head">
         <div class="teams-title">დარეგისტრირებული გუნდები</div>
@@ -1047,17 +978,16 @@
   <footer>
     <p>© 2026 &nbsp;·&nbsp; <span>თავისუფალი უნივერსიტეტი</span> &amp; <span>აგრარული უნივერსიტეტი</span> &nbsp;·&nbsp; კამპუსის ინტელექტუალური ჩემპიონატი</p>
   </footer>
-
 </div>
 
+<!-- Modal window -->
 <div class="hoodie-overlay" id="hoodie-overlay" aria-hidden="true">
-  <div class="hoodie-modal" id="hoodie-modal" role="dialog" aria-modal="true" aria-labelledby="hoodie-title">
-    <button type="button" class="hoodie-close" onclick="closeHoodie()" aria-label="დახურვა">&times;</button>
-    <img class="hoodie-modal-img" src="hoodie.png" alt="შავი ჰუდი">
-    <h3 id="hoodie-title">შავი ჰუდი</h3>
-
+  <div class="hoodie-modal" id="hoodie-modal" role="dialog" aria-modal="true">
+    <button type="button" class="hoodie-close" onclick="closeHoodie()">&times;</button>
+    <img class="hoodie-modal-img" id="modal-img" src="hoodie.png" alt="პროდუქტი">
+    <h3 id="modal-title">შავი ჰუდი</h3>
     <div class="hoodie-choose">
-      <div class="hm-sub">აირჩიე ზომა</div>
+      <div class="hm-sub" style="text-align:center; font-size: 0.85rem; color: var(--text-light);" id="size-title-label">აირჩიე ზომა</div>
       <div class="size-grid" id="size-grid">
         <button type="button" class="size-btn" onclick="pickSize('S')">S</button>
         <button type="button" class="size-btn" onclick="pickSize('M')">M</button>
@@ -1067,37 +997,31 @@
       </div>
       <div class="size-error" id="size-error"></div>
       <div class="hoodie-buy-row">
-        <span class="hoodie-buy-price">ფასი: 30₾</span>
+        <span class="hoodie-buy-price" id="modal-price">ფასი: 40₾</span>
         <button type="button" class="btn-reg btn-submit" onclick="buyHoodie()">ყიდვა</button>
       </div>
     </div>
-
     <div class="hoodie-pay">
-      <p class="pay-note">გადაიხადეთ <strong>30₾</strong> შემდეგ ანგარიშზე:</p>
-      <div class="iban-block">
-        <div class="iban-label">საბანკო ანგარიში (IBAN)</div>
-        <div class="iban-value" id="hoodie-iban">GE72BG0000000538733828</div>
+      <p class="pay-note" style="font-size:0.85rem; text-align:center; margin-bottom:12px;">გადაიხადეთ <strong id="pay-price-label">40₾</strong> შემდეგ ანგარიშზე:</p>
+      <div class="iban-block" style="background:var(--off-white); border:1px solid rgba(26,92,42,0.2); border-left:4px solid var(--gold);">
+        <div class="iban-label" style="color:var(--green);">საბანკო ანგარიში (IBAN)</div>
+        <div class="iban-value" id="hoodie-iban" style="color:var(--text-dark);">GE72BG0000000538733828</div>
       </div>
       <button class="copy-btn" id="hoodie-copy-btn" type="button" onclick="copyHoodieIBAN()">IBAN-ის კოპირება</button>
-      <div class="pay-recipe"><strong>მნიშვნელოვანი:</strong> გადახდის დანიშნულებაში მიუთითეთ სახელი, გვარი და ზომა: <strong id="pay-size-label"></strong></div>
+      <div class="pay-recipe" style="font-size:0.82rem; margin-top:14px; padding-top:10px; border-top:1px solid rgba(0,0,0,0.1);">
+        <strong>მნიშვნელოვანი:</strong> გადახდის დანიშნულებაში მიუთითეთ სახელი, გვარი, პროდუქტი (<span id="pay-prod-label">შავი ჰუდი</span>) და ზომა: <strong id="pay-size-label"></strong>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
 var BASE_TITLE = document.title;
-
-/* Google Apps Script — POST: რეგისტრაციის გაგზავნა, GET: გუნდების სიის წამოღება */
 var SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw-cDtH3ha6uD31-UIC_a-Q8H6GeRHtD6EMlETealEGVxXvt6kXTV61VKdLC64CFA0d/exec';
 var TEAMS_URL = SHEETS_URL;
-var TEAMS_REFRESH_MS = 20000; // სიის განახლების ინტერვალი (20 წამი)
+var TEAMS_REFRESH_MS = 20000;
+var WINNERS = [];
 
-/* გამარჯვებულები — აქ დაამატეთ ჩემპიონატის შემდეგ. მაგალითი:
-   { year: '2026', place: 1, team: 'გუნდის სახელი', score: '120 ქულა' } */
-var WINNERS = [
-];
-
-/* ---------- დამხმარე ფუნქციები ---------- */
 function esc(s) {
   return String(s).replace(/[&<>"']/g, function (c) {
     return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -1110,21 +1034,32 @@ function el(tag, cls, text) {
   return n;
 }
 
-/* ---------- გვერდების გადართვა (#home / #register) და ნავიგაცია (#about / #signup / #stats) ---------- */
+/* ---------- მარშრუტიზაცია & გვერდითი სვეტის მართვა ---------- */
 function route() {
   var h = location.hash;
   var isReg = h === '#register';
   var isHoodie = h === '#hoodie';
-  document.getElementById('view-home').hidden = isReg || isHoodie;
+  var isHome = !isReg && !isHoodie;
+
+  document.getElementById('view-home').hidden = !isHome;
   document.getElementById('view-register').hidden = !isReg;
   document.getElementById('view-hoodie').hidden = !isHoodie;
+
+  /* დარეგისტრირებული გუნდების სვეტი ჩანდეს მხოლოდ მთავარ გვერდზე */
+  if (isHome) {
+    document.body.classList.remove('hide-sidebar');
+  } else {
+    document.body.classList.add('hide-sidebar');
+  }
+
   document.title = isReg ? 'რეგისტრაცია · ' + BASE_TITLE
-                 : isHoodie ? 'შავი ჰუდი · ' + BASE_TITLE
+                 : isHoodie ? 'შავი ჰუდი & მერჩი · ' + BASE_TITLE
                  : BASE_TITLE;
+
   if (!isHoodie) closeHoodie();
 
   var target = null;
-  if (!isReg && !isHoodie && (h === '#about' || h === '#signup' || h === '#stats')) {
+  if (isHome && (h === '#about' || h === '#signup' || h === '#stats')) {
     target = document.getElementById(h.slice(1));
   }
   if (target) {
@@ -1137,7 +1072,7 @@ function route() {
 }
 window.addEventListener('hashchange', route);
 
-/* ---------- გამარჯვებულები ---------- */
+/* ---------- სტატისტიკა ---------- */
 function renderWinners() {
   var box = document.getElementById('winners-box');
   box.textContent = '';
@@ -1148,23 +1083,12 @@ function renderWinners() {
     box.appendChild(empty);
     return;
   }
-  var medals = { 1: '🥇', 2: '🥈', 3: '🥉' };
-  var grid = el('div', 'winners-grid');
-  WINNERS.forEach(function (w) {
-    var card = el('div', 'winner-card');
-    card.appendChild(el('div', 'w-medal', medals[w.place] || '🏅'));
-    if (w.year) card.appendChild(el('div', 'w-year', w.year));
-    card.appendChild(el('div', 'w-team', w.team || ''));
-    if (w.score) card.appendChild(el('div', 'w-score', w.score));
-    grid.appendChild(card);
-  });
-  box.appendChild(grid);
 }
 
-/* ---------- დარეგისტრირებული გუნდების სვეტი ---------- */
+/* ---------- გუნდების სია ---------- */
 var serverTeams = [];
 var localTeams = [];
-var teamsStatus = 'loading'; // loading | ok | error
+var teamsStatus = 'loading';
 var shownKeys = null;
 var lastSig = null;
 
@@ -1182,11 +1106,9 @@ function renderTeams() {
   var sig = teamsStatus + '|' + list.join('\u0001');
   if (sig === lastSig) return;
   lastSig = sig;
-
   var ul = document.getElementById('teams-list');
   document.getElementById('teams-count').textContent = list.length;
   ul.textContent = '';
-
   if (!list.length) {
     var msg = teamsStatus === 'loading' ? 'იტვირთება...'
             : teamsStatus === 'error'   ? 'სია დროებით მიუწვდომელია'
@@ -1194,20 +1116,12 @@ function renderTeams() {
     ul.appendChild(el('li', 'teams-empty', msg));
     return;
   }
-
-  var firstRender = (shownKeys === null);
-  var nowShown = {};
-  // ახალი გუნდები ზემოთ; ნომერი = რეგისტრაციის რიგითობა
   for (var i = list.length - 1; i >= 0; i--) {
-    var key = list[i].toLowerCase();
-    nowShown[key] = true;
     var li = el('li', 'team-item');
-    if (!firstRender && !shownKeys[key]) li.classList.add('is-new');
     li.appendChild(el('span', 'team-num', String(i + 1)));
-    li.appendChild(el('span', 'team-name', list[i])); // textContent — უსაფრთხოა
+    li.appendChild(el('span', 'team-name', list[i]));
     ul.appendChild(li);
   }
-  shownKeys = nowShown;
 }
 
 function fetchTeams() {
@@ -1228,11 +1142,9 @@ function fetchTeams() {
 function addLocalTeam(name) {
   localTeams.push(name);
   renderTeams();
-  setTimeout(fetchTeams, 3000);
-  setTimeout(fetchTeams, 10000);
 }
 
-/* ---------- რეგისტრაციის ფორმა ---------- */
+/* ---------- რეგისტრაცია ---------- */
 function buildMembersForm() {
   var container = document.getElementById('members-container');
   container.innerHTML = '';
@@ -1299,6 +1211,7 @@ function submitReg() {
   errBox.hidden = true;
   submitBtn.disabled = true;
   submitBtn.textContent = 'იგზავნება...';
+
   var name  = document.getElementById('team-name').value.trim();
   var capF  = document.getElementById('cap-first').value.trim();
   var capL  = document.getElementById('cap-last').value.trim();
@@ -1310,6 +1223,7 @@ function submitReg() {
     members['member' + i] = f + ' ' + l;
   }
   var payload = Object.assign({ teamName: name, captainFirst: capF, captainLast: capL, captainPhone: phone }, members);
+
   fetch(SHEETS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
   .then(function() {
     showSuccess(name, capF, capL, phone, members);
@@ -1340,26 +1254,45 @@ function copyIBAN() {
   var btn  = document.getElementById('copy-btn');
   navigator.clipboard.writeText(iban).then(function() {
     btn.classList.add('copied');
-    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> დაკოპირებულია!';
+    btn.innerHTML = 'დაკოპირებულია!';
     setTimeout(function() {
       btn.classList.remove('copied');
-      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> IBAN-ის კოპირება';
+      btn.innerHTML = 'IBAN-ის კოპირება';
     }, 2500);
   });
 }
 
-/* ---------- შავი ჰუდი ---------- */
+/* ---------- პროდუქტების (ჰუდი / მერჩი) მოდალური ფანჯარა ---------- */
+var currentProduct = 'hoodie';
 var hoodieSize = null;
-function openHoodie() {
+
+function openProductModal(prod) {
+  currentProduct = prod;
   hoodieSize = null;
   document.getElementById('hoodie-modal').classList.remove('paying');
   document.getElementById('size-error').textContent = '';
   document.querySelectorAll('.size-btn').forEach(function (b) { b.classList.remove('selected'); });
+
+  if (prod === 'merch') {
+    document.getElementById('modal-title').textContent = 'მერჩი';
+    document.getElementById('modal-img').src = 'merch.png';
+    document.getElementById('modal-price').textContent = 'ფასი: 50₾';
+    document.getElementById('pay-price-label').textContent = '50₾';
+    document.getElementById('pay-prod-label').textContent = 'მერჩი';
+  } else {
+    document.getElementById('modal-title').textContent = 'შავი ჰუდი';
+    document.getElementById('modal-img').src = 'hoodie.png';
+    document.getElementById('modal-price').textContent = 'ფასი: 40₾';
+    document.getElementById('pay-price-label').textContent = '40₾';
+    document.getElementById('pay-prod-label').textContent = 'შავი ჰუდი';
+  }
+
   var ov = document.getElementById('hoodie-overlay');
   ov.classList.add('open');
   ov.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
 }
+
 function closeHoodie() {
   var ov = document.getElementById('hoodie-overlay');
   if (!ov.classList.contains('open')) return;
@@ -1367,6 +1300,7 @@ function closeHoodie() {
   ov.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('modal-open');
 }
+
 function pickSize(s) {
   hoodieSize = s;
   document.getElementById('size-error').textContent = '';
@@ -1374,6 +1308,7 @@ function pickSize(s) {
     b.classList.toggle('selected', b.textContent === s);
   });
 }
+
 function buyHoodie() {
   if (!hoodieSize) {
     document.getElementById('size-error').textContent = 'გთხოვთ, აირჩიოთ ზომა';
@@ -1382,6 +1317,7 @@ function buyHoodie() {
   document.getElementById('pay-size-label').textContent = hoodieSize;
   document.getElementById('hoodie-modal').classList.add('paying');
 }
+
 function copyHoodieIBAN() {
   var iban = document.getElementById('hoodie-iban').textContent;
   var btn = document.getElementById('hoodie-copy-btn');
@@ -1391,6 +1327,7 @@ function copyHoodieIBAN() {
     setTimeout(function () { btn.classList.remove('copied'); btn.textContent = 'IBAN-ის კოპირება'; }, 2500);
   });
 }
+
 document.getElementById('hoodie-overlay').addEventListener('click', function (e) {
   if (e.target === this) closeHoodie();
 });
@@ -1402,7 +1339,6 @@ renderWinners();
 route();
 fetchTeams();
 setInterval(function () { if (!document.hidden) fetchTeams(); }, TEAMS_REFRESH_MS);
-document.addEventListener('visibilitychange', function () { if (!document.hidden) fetchTeams(); });
 </script>
 </body>
 </html>
