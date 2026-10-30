@@ -91,9 +91,10 @@
     color: inherit;
   }
 
+  /* მრგვალი ლოგო */
   .owl-ring {
-    width: 170px;
-    height: 170px;
+    width: 190px;
+    height: 190px;
     border-radius: 50%;
     overflow: hidden;
     background: transparent;
@@ -107,8 +108,9 @@
   .owl-ring img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center center;
+    border-radius: 50%;
     display: block;
   }
   .owl-ring.no-logo::before { content: '\1F989'; font-size: 5rem; }
@@ -155,6 +157,20 @@
     align-items: start;
   }
 
+  /* ფართო ეკრანზე: ძირითადი ნაწილი გვერდის ცენტრშია (გვერდებთან სიმეტრიული),
+     გუნდების სია კი მარჯვენა კიდესთან */
+  @media (min-width: 1240px) {
+    .layout {
+      max-width: none;
+      padding: 0 40px;
+      grid-template-columns: 270px minmax(0, 820px) 270px;
+      justify-content: space-between;
+      gap: 0;
+    }
+    main { grid-column: 2; grid-row: 1; }
+    .teams-panel { grid-column: 3; grid-row: 1; }
+  }
+
   main {
     min-width: 0;
     padding: 48px 0 56px;
@@ -184,28 +200,33 @@
     text-align: center;
   }
 
-  .about-grid {
+  /* ---------- საინფორმაციო ველი: ერთიანი ფანჯარა ---------- */
+  .about-panel {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-  }
-
-  .about-card {
+    grid-template-columns: repeat(3, 1fr);
     border: 1px solid rgba(26,92,42,0.15);
     border-top: 3px solid var(--gold);
-    padding: 24px 20px;
     background: var(--off-white);
-    border-radius: 4px;
-    text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 6px;
+    box-shadow: 0 6px 20px rgba(26,92,42,0.06);
   }
-  .about-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,92,42,0.1); }
-  .about-card .card-icon { font-size: 2rem; margin-bottom: 10px; }
-  .about-card .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--green); margin-bottom: 6px; }
-  .about-card .card-body { font-size: 0.85rem; color: var(--text-light); line-height: 1.55; }
+  .about-item {
+    padding: 32px 28px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-item + .about-item { border-left: 1px solid rgba(26,92,42,0.12); }
+  .about-item p { font-size: 0.95rem; color: var(--text-mid); line-height: 1.7; }
+
+  @media (max-width: 720px) {
+    .about-panel { grid-template-columns: 1fr; }
+    .about-item + .about-item { border-left: none; border-top: 1px solid rgba(26,92,42,0.12); }
+  }
 
   /* ---------- Big register button ---------- */
-  .cta-wrap { text-align: center; }
+  .cta-wrap { display: flex; justify-content: center; }
   .cta-btn {
     display: inline-flex;
     align-items: center;
@@ -647,7 +668,7 @@
     .view { gap: 36px; }
     .cta-btn { width: 100%; padding: 22px 24px; font-size: 1.2rem; }
     .payment-box { padding: 28px 22px; }
-    .owl-ring { width: 120px; height: 120px; }
+    .owl-ring { width: 140px; height: 140px; }
     .field-row { grid-template-columns: 1fr; }
     .reg-body { padding: 24px 18px 20px; }
     .reg-step-indicator { font-size: 0.65rem; padding: 10px 4px; }
@@ -666,8 +687,7 @@
     <div class="header-inner">
       <a class="hero-section" href="#home" aria-label="მთავარ გვერდზე დაბრუნება">
         <div class="owl-ring">
-          <!-- ⬇⬇⬇ ძველი ფაილიდან დააკოპირეთ ლოგოს src="data:image/..." და ჩასვით PASTE_LOGO_HERE-ს ადგილას ⬇⬇⬇ -->
-          <img src="PASTE_LOGO_HERE" alt="Campus Championship Owl Logo" onerror="this.style.display='none'; this.parentNode.classList.add('no-logo');">
+          <img src="logo.png" alt="Campus Championship Owl Logo" onerror="this.style.display='none'; this.parentNode.classList.add('no-logo');">
         </div>
         <h1 class="event-title">კამპუსის ინტელექტუალური<br>ჩემპიონატი</h1>
         <div class="year-badge">2026</div>
@@ -687,21 +707,15 @@
             <h2>ჩემპიონატის შესახებ</h2>
             <div class="line rev"></div>
           </div>
-          <div class="about-grid">
-            <div class="about-card">
-              <div class="card-icon">🦉</div>
-              <div class="card-title">ინტელექტუალური თამაში</div>
-              <div class="card-body">სტუდენტური გუნდების ინტელექტუალური შეჯიბრება კამპუსის მასშტაბით.</div>
+          <div class="about-panel">
+            <div class="about-item">
+              <p>სტუდენტური გუნდების ინტელექტუალური შეჯიბრება კამპუსის მასშტაბით.</p>
             </div>
-            <div class="about-card">
-              <div class="card-icon">👥</div>
-              <div class="card-title">გუნდური ფორმატი</div>
-              <div class="card-body">თითოეული გუნდი წარმოდგენილია კაპიტანის მეშვეობით, რომელიც პასუხისმგებელია რეგისტრაციაზე.</div>
+            <div class="about-item">
+              <p>თითოეული გუნდი წარმოდგენილია კაპიტანის მეშვეობით, რომელიც პასუხისმგებელია რეგისტრაციაზე.</p>
             </div>
-            <div class="about-card">
-              <div class="card-icon">🏆</div>
-              <div class="card-title">კამპუსის ჩემპიონი</div>
-              <div class="card-body">გამარჯვებული გუნდი მოიპოვებს კამპუსის ინტელექტუალური ჩემპიონის ტიტულს 2026.</div>
+            <div class="about-item">
+              <p>გამარჯვებული გუნდი მოიპოვებს 2026 წლის ზამთრის სერიის კამპუსის ინტელექტუალური ჩემპიონის ტიტულს.</p>
             </div>
           </div>
         </section>
