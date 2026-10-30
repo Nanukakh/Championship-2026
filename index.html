@@ -709,6 +709,108 @@
     .reg-step-indicator { font-size: 0.65rem; padding: 10px 4px; }
   }
 
+
+  /* ---------- შავი ჰუდი ---------- */
+  #hoodie-teaser { scroll-margin-top: 70px; }
+  .hoodie-frame {
+    display: block;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+    padding: 10px;
+    background: var(--white);
+    border: 4px solid var(--green);
+    outline: 2px solid var(--gold);
+    outline-offset: -10px;
+    border-radius: 6px;
+    box-shadow: 0 10px 28px rgba(26,92,42,0.15);
+    cursor: pointer;
+    font: inherit;
+    text-decoration: none;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .hoodie-frame:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(26,92,42,0.22); }
+  .hoodie-frame:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+  .hoodie-frame img { width: 100%; height: auto; display: block; border-radius: 2px; background: #f1f1ef; }
+  .hoodie-caption { text-align: center; margin-top: 18px; }
+  .hoodie-hint { font-size: 0.85rem; color: var(--text-light); }
+  .hoodie-price-small { margin-top: 6px; font-size: 0.95rem; font-weight: 600; color: var(--green); letter-spacing: 0.04em; }
+
+  .hoodie-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(10,30,15,0.6);
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.25s, visibility 0.25s;
+    overflow-y: auto;
+  }
+  .hoodie-overlay.open { opacity: 1; visibility: visible; }
+  .hoodie-modal {
+    position: relative;
+    width: 100%; max-width: 440px;
+    margin: auto;
+    background: var(--white);
+    border-top: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 28px 28px 22px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+    transform: translateY(16px) scale(0.96);
+    transition: transform 0.25s;
+  }
+  .hoodie-overlay.open .hoodie-modal { transform: none; }
+  .hoodie-close {
+    position: absolute; top: 10px; right: 12px;
+    width: 34px; height: 34px;
+    border: none; background: transparent;
+    font-size: 1.6rem; line-height: 1; color: var(--text-light);
+    cursor: pointer; border-radius: 50%;
+  }
+  .hoodie-close:hover { color: var(--green); background: rgba(26,92,42,0.08); }
+  .hoodie-modal-img {
+    display: block; width: 150px; height: auto;
+    margin: 0 auto 14px;
+    border: 3px solid var(--green); border-radius: 4px; padding: 4px; background: #f1f1ef;
+  }
+  .hoodie-modal h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 700; color: var(--green);
+    text-align: center; margin-bottom: 4px;
+  }
+  .hoodie-modal .hm-sub { text-align: center; font-size: 0.82rem; color: var(--text-light); margin-bottom: 18px; }
+  .size-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 8px; }
+  .size-btn {
+    min-width: 56px; padding: 11px 14px;
+    font-family: 'Fira Sans', sans-serif; font-weight: 600; font-size: 0.9rem;
+    color: var(--green); background: var(--white);
+    border: 1.5px solid rgba(26,92,42,0.3); border-radius: 4px;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .size-btn:hover { border-color: var(--green); }
+  .size-btn.selected { background: var(--green); color: var(--gold-light); border-color: var(--green); }
+  .size-error { min-height: 18px; text-align: center; font-size: 0.8rem; color: #c0392b; margin-bottom: 6px; }
+  .hoodie-buy-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding-top: 16px; border-top: 1px solid rgba(26,92,42,0.12);
+  }
+  .hoodie-buy-price { font-size: 0.95rem; font-weight: 600; color: var(--green); }
+  .hoodie-pay { display: none; }
+  .hoodie-pay .pay-note { font-size: 0.85rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 14px; text-align: center; }
+  .hoodie-pay .iban-block { background: var(--off-white); border: 1px solid rgba(26,92,42,0.2); border-left: 4px solid var(--gold); margin-top: 0; }
+  .hoodie-pay .iban-label { color: var(--green); }
+  .hoodie-pay .iban-value { color: var(--text-dark); }
+  .hoodie-pay .copy-btn { margin-top: 14px; }
+  .hoodie-pay .pay-recipe { font-size: 0.82rem; color: var(--text-mid); line-height: 1.6; margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(26,92,42,0.12); }
+  .hoodie-pay .pay-recipe strong { color: var(--green); }
+  .hoodie-modal.paying .hoodie-choose { display: none; }
+  .hoodie-modal.paying .hoodie-pay { display: block; }
+  body.modal-open { overflow: hidden; }
+
+  @media (max-width: 600px) {
+    .hoodie-modal { padding: 24px 18px 18px; }
+    .hoodie-modal-img { width: 120px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .owl-ring, .live-dot, .team-item.is-new { animation: none; }
     html { scroll-behavior: auto; }
@@ -721,6 +823,7 @@
   <nav class="top-nav" aria-label="ნავიგაცია">
     <a href="#about">ჩემპიონატის შესახებ</a>
     <a href="#signup">რეგისტრაცია</a>
+    <a href="#hoodie">შავი ჰუდი</a>
     <a href="#stats">სტატისტიკა</a>
   </nav>
 
@@ -765,6 +868,21 @@
           <a class="cta-btn" href="#register">დარეგისტრირდი</a>
         </section>
 
+        <section id="hoodie-teaser">
+          <div class="section-label">
+            <div class="line"></div>
+            <h2>შავი ჰუდი</h2>
+            <div class="line rev"></div>
+          </div>
+          <a class="hoodie-frame" href="#hoodie" aria-label="შავი ჰუდი — გახსნა">
+            <img src="hoodie.png" alt="შავი ჰუდი">
+          </a>
+          <div class="hoodie-caption">
+            <div class="hoodie-hint">დააჭირეთ დეტალებისთვის</div>
+            <div class="hoodie-price-small">30₾</div>
+          </div>
+        </section>
+
         <section id="stats">
           <div class="section-label">
             <div class="line"></div>
@@ -772,6 +890,31 @@
             <div class="line rev"></div>
           </div>
           <div id="winners-box"></div>
+        </section>
+
+      </div>
+
+      <!-- ===================== შავი ჰუდის გვერდი ===================== -->
+      <div class="view" id="view-hoodie" hidden>
+
+        <a class="back-link" href="#home">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          მთავარ გვერდზე
+        </a>
+
+        <section>
+          <div class="section-label">
+            <div class="line"></div>
+            <h2>შავი ჰუდი</h2>
+            <div class="line rev"></div>
+          </div>
+          <button type="button" class="hoodie-frame" onclick="openHoodie()" aria-label="შავი ჰუდი — ყიდვა">
+            <img src="hoodie.png" alt="შავი ჰუდი">
+          </button>
+          <div class="hoodie-caption">
+            <div class="hoodie-hint">დააჭირეთ ფოტოს ზომის ასარჩევად და საყიდლად</div>
+            <div class="hoodie-price-small">30₾</div>
+          </div>
         </section>
 
       </div>
@@ -907,6 +1050,40 @@
 
 </div>
 
+<div class="hoodie-overlay" id="hoodie-overlay" aria-hidden="true">
+  <div class="hoodie-modal" id="hoodie-modal" role="dialog" aria-modal="true" aria-labelledby="hoodie-title">
+    <button type="button" class="hoodie-close" onclick="closeHoodie()" aria-label="დახურვა">&times;</button>
+    <img class="hoodie-modal-img" src="hoodie.png" alt="შავი ჰუდი">
+    <h3 id="hoodie-title">შავი ჰუდი</h3>
+
+    <div class="hoodie-choose">
+      <div class="hm-sub">აირჩიე ზომა</div>
+      <div class="size-grid" id="size-grid">
+        <button type="button" class="size-btn" onclick="pickSize('S')">S</button>
+        <button type="button" class="size-btn" onclick="pickSize('M')">M</button>
+        <button type="button" class="size-btn" onclick="pickSize('L')">L</button>
+        <button type="button" class="size-btn" onclick="pickSize('XL')">XL</button>
+        <button type="button" class="size-btn" onclick="pickSize('XXL')">XXL</button>
+      </div>
+      <div class="size-error" id="size-error"></div>
+      <div class="hoodie-buy-row">
+        <span class="hoodie-buy-price">ფასი: 30₾</span>
+        <button type="button" class="btn-reg btn-submit" onclick="buyHoodie()">ყიდვა</button>
+      </div>
+    </div>
+
+    <div class="hoodie-pay">
+      <p class="pay-note">გადაიხადეთ <strong>30₾</strong> შემდეგ ანგარიშზე:</p>
+      <div class="iban-block">
+        <div class="iban-label">საბანკო ანგარიში (IBAN)</div>
+        <div class="iban-value" id="hoodie-iban">GE72BG0000000538733828</div>
+      </div>
+      <button class="copy-btn" id="hoodie-copy-btn" type="button" onclick="copyHoodieIBAN()">IBAN-ის კოპირება</button>
+      <div class="pay-recipe"><strong>მნიშვნელოვანი:</strong> გადახდის დანიშნულებაში მიუთითეთ სახელი, გვარი და ზომა: <strong id="pay-size-label"></strong></div>
+    </div>
+  </div>
+</div>
+
 <script>
 var BASE_TITLE = document.title;
 
@@ -937,12 +1114,17 @@ function el(tag, cls, text) {
 function route() {
   var h = location.hash;
   var isReg = h === '#register';
-  document.getElementById('view-home').hidden = isReg;
+  var isHoodie = h === '#hoodie';
+  document.getElementById('view-home').hidden = isReg || isHoodie;
   document.getElementById('view-register').hidden = !isReg;
-  document.title = isReg ? 'რეგისტრაცია · ' + BASE_TITLE : BASE_TITLE;
+  document.getElementById('view-hoodie').hidden = !isHoodie;
+  document.title = isReg ? 'რეგისტრაცია · ' + BASE_TITLE
+                 : isHoodie ? 'შავი ჰუდი · ' + BASE_TITLE
+                 : BASE_TITLE;
+  if (!isHoodie) closeHoodie();
 
   var target = null;
-  if (!isReg && (h === '#about' || h === '#signup' || h === '#stats')) {
+  if (!isReg && !isHoodie && (h === '#about' || h === '#signup' || h === '#stats')) {
     target = document.getElementById(h.slice(1));
   }
   if (target) {
@@ -1165,6 +1347,54 @@ function copyIBAN() {
     }, 2500);
   });
 }
+
+/* ---------- შავი ჰუდი ---------- */
+var hoodieSize = null;
+function openHoodie() {
+  hoodieSize = null;
+  document.getElementById('hoodie-modal').classList.remove('paying');
+  document.getElementById('size-error').textContent = '';
+  document.querySelectorAll('.size-btn').forEach(function (b) { b.classList.remove('selected'); });
+  var ov = document.getElementById('hoodie-overlay');
+  ov.classList.add('open');
+  ov.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+}
+function closeHoodie() {
+  var ov = document.getElementById('hoodie-overlay');
+  if (!ov.classList.contains('open')) return;
+  ov.classList.remove('open');
+  ov.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+}
+function pickSize(s) {
+  hoodieSize = s;
+  document.getElementById('size-error').textContent = '';
+  document.querySelectorAll('.size-btn').forEach(function (b) {
+    b.classList.toggle('selected', b.textContent === s);
+  });
+}
+function buyHoodie() {
+  if (!hoodieSize) {
+    document.getElementById('size-error').textContent = 'გთხოვთ, აირჩიოთ ზომა';
+    return;
+  }
+  document.getElementById('pay-size-label').textContent = hoodieSize;
+  document.getElementById('hoodie-modal').classList.add('paying');
+}
+function copyHoodieIBAN() {
+  var iban = document.getElementById('hoodie-iban').textContent;
+  var btn = document.getElementById('hoodie-copy-btn');
+  navigator.clipboard.writeText(iban).then(function () {
+    btn.classList.add('copied');
+    btn.textContent = 'დაკოპირებულია!';
+    setTimeout(function () { btn.classList.remove('copied'); btn.textContent = 'IBAN-ის კოპირება'; }, 2500);
+  });
+}
+document.getElementById('hoodie-overlay').addEventListener('click', function (e) {
+  if (e.target === this) closeHoodie();
+});
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeHoodie(); });
 
 /* ---------- გაშვება ---------- */
 buildMembersForm();
