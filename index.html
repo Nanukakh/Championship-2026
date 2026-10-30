@@ -50,7 +50,7 @@
   .page-frame::before { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
   .page-frame::after  { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
 
-  /* ---------- მცურავი ღილაკი (გადიდებული და ცენტრირებული) ---------- */
+  /* ---------- მცურავი ღილაკი ---------- */
   .floating-hoodie-btn {
     position: fixed;
     left: 20px;
@@ -479,9 +479,59 @@
   .copy-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
   .copy-btn.copied { background: #4caf6a; color: white; }
 
+  /* ---------- მოძრავი სტრიქონი (News Ticker) ---------- */
+  .news-ticker-container {
+    background: var(--green);
+    border-top: 2px solid var(--gold);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 10px 0;
+    position: relative;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  }
+  .news-ticker-track {
+    display: inline-block;
+    white-space: nowrap;
+    animation: tickerMove 25s linear infinite;
+  }
+  .news-ticker-container:hover .news-ticker-track {
+    animation-play-state: paused;
+  }
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--white);
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    margin: 0 24px;
+    transition: color 0.2s;
+  }
+  .ticker-item:hover {
+    color: var(--gold-light);
+  }
+  .ticker-badge {
+    background: var(--gold);
+    color: var(--green);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+  }
+  .ticker-sep {
+    color: var(--gold);
+    opacity: 0.6;
+  }
+  @keyframes tickerMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
   footer {
     text-align: center;
-    padding: 20px 32px;
+    padding: 16px 32px;
     border-top: 1px solid rgba(26,92,42,0.12);
     font-size: 0.78rem;
     color: var(--text-light);
@@ -991,6 +1041,33 @@
     </aside>
   </div>
 
+  <!-- ===================== მოძრავი სტრიქონი (News Ticker) ===================== -->
+  <div class="news-ticker-container">
+    <div class="news-ticker-track">
+      <a href="https://freeuni.edu.ge/ge/news/kampusis-inteleqtualuri-cempionatis-rigir-me-6-sezoni/" target="_blank" class="ticker-item">
+        <span class="ticker-badge">სიახლე</span>
+        თავისუფალი და აგრარული უნივერსიტეტები
+      </a>
+      <span class="ticker-sep">❖</span>
+
+      <!-- აქ ჩაამატე ახალი ლინკები ქვემოთ მოცემული შაბლონის მიხედვით: -->
+      <!--
+      <a href="შენი_ლინკი_აქ" target="_blank" class="ticker-item">
+        <span class="ticker-badge">სიახლე</span>
+        შენი_სათაური_აქ
+      </a>
+      <span class="ticker-sep">❖</span>
+      -->
+
+      <!-- დუბლირებული ბლოკი უწყვეტი მოძრაობის ეფექტისთვის (Seamless Loop) -->
+      <a href="https://freeuni.edu.ge/ge/news/kampusis-inteleqtualuri-cempionatis-rigir-me-6-sezoni/" target="_blank" class="ticker-item">
+        <span class="ticker-badge">სიახლე</span>
+        თავისუფალი და აგრარული უნივერსიტეტები
+      </a>
+      <span class="ticker-sep">❖</span>
+    </div>
+  </div>
+
   <footer>
     <p>© 2026 &nbsp;·&nbsp; <span>თავისუფალი უნივერსიტეტი</span> &amp; <span>აგრარული უნივერსიტეტი</span> &nbsp;·&nbsp; კამპუსის ინტელექტუალური ჩემპიონატი</p>
   </footer>
@@ -1056,7 +1133,7 @@ function route() {
   var isHoodie = h === '#hoodie';
   var isHome = !isReg && !isHoodie;
 
-  /* ჰედერისა და გვერდითი სვეტის დამალვა არამთავარ გვერდებზე */
+  /* ჰედერისა და გვერდითი სვეტის დამალვა */
   if (isHome) {
     document.body.classList.remove('hide-header', 'hide-sidebar');
   } else {
