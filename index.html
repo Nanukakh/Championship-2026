@@ -50,15 +50,14 @@
   .page-frame::before { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
   .page-frame::after  { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
 
-  /* ---------- მცურავი ღილაკი (გადიდებული და ცენტრირებული) ---------- */
+  /* ---------- მცურავი ღილაკი (პატარა + გადასატანი) ---------- */
   .floating-hoodie-btn {
     position: fixed;
     left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: calc(50% - 70px);
     z-index: 99;
-    width: 170px;
-    height: 170px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     background: var(--white);
     color: #000000;
@@ -69,21 +68,34 @@
     justify-content: center;
     text-align: center;
     font-family: 'Fira Sans', sans-serif;
-    font-size: 1.35rem;
+    font-size: 1.15rem;
     font-weight: 700;
     text-decoration: none;
     line-height: 1.25;
-    padding: 16px;
-    transition: transform 0.25s, box-shadow 0.25s;
+    padding: 14px;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    transition: box-shadow 0.25s;
     animation: pulseFloat 3s ease-in-out infinite;
   }
   .floating-hoodie-btn:hover {
-    transform: translateY(-50%) scale(1.08);
     box-shadow: 0 12px 35px rgba(0,0,0,0.4);
   }
+  .floating-hoodie-btn.dragging {
+    cursor: grabbing;
+    animation: none;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+  }
   @keyframes pulseFloat {
-    0%, 100% { transform: translateY(-50%); }
-    50% { transform: translateY(calc(-50% - 10px)); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @media (max-width: 600px) {
+    .floating-hoodie-btn { width: 110px; height: 110px; font-size: 0.95rem; padding: 10px; left: 10px; top: calc(50% - 55px); }
   }
 
   /* ---------- ზედა ნავიგაცია ---------- */
@@ -775,14 +787,14 @@
 </head>
 <body>
 
-<!-- მარცხენა მცურავი ღილაკი -->
-<a class="floating-hoodie-btn" href="#hoodie">შავი<br>ჰუდი</a>
+<!-- მცურავი ღილაკი: შეგიძლიათ მოკიდოთ ხელი და გადაიტანოთ -->
+<a class="floating-hoodie-btn" id="floating-hoodie" href="#hoodie" draggable="false" title="გადაიტანეთ სასურველ ადგილას">შავი<br>ჰუდი</a>
 
 <div class="page-frame">
   <nav class="top-nav" aria-label="ნავიგაცია">
     <a href="#about">ჩემპიონატის შესახებ</a>
     <a href="#register">რეგისტრაცია</a>
-    <a href="#hoodie">საჩუქრები</a>
+    <a href="#hoodie">მოაზროვნეებისთვის</a>
     <a href="#stats">სტატისტიკა</a>
   </nav>
 
@@ -1086,6 +1098,61 @@ function route() {
   }
 }
 window.addEventListener('hashchange', route);
+
+/* ---------- მცურავი ღილაკის გადატანა (მაუსით და თითით) ---------- */
+(function () {
+  var btn = document.getElementById('floating-hoodie');
+  var startX, startY, offX, offY, dragging = false, moved = false, pid = null;
+
+  function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+  btn.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+  btn.addEventListener('pointerdown', function (e) {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    dragging = true; moved = false; pid = e.pointerId;
+    btn.classList.add('dragging');           // ანიმაცია ჩერდება
+    var r = btn.getBoundingClientRect();
+    btn.style.left = r.left + 'px';
+    btn.style.top  = r.top + 'px';
+    offX = e.clientX - r.left;
+    offY = e.clientY - r.top;
+    startX = e.clientX; startY = e.clientY;
+    try { btn.setPointerCapture(pid); } catch (err) {}
+  });
+
+  btn.addEventListener('pointermove', function (e) {
+    if (!dragging || e.pointerId !== pid) return;
+    if (!moved && Math.abs(e.clientX - startX) + Math.abs(e.clientY - startY) < 6) return;
+    moved = true;
+    var w = btn.offsetWidth, h = btn.offsetHeight;
+    btn.style.left = clamp(e.clientX - offX, 0, window.innerWidth - w) + 'px';
+    btn.style.top  = clamp(e.clientY - offY, 0, window.innerHeight - h) + 'px';
+  });
+
+  function end(e) {
+    if (!dragging || (e && e.pointerId !== pid)) return;
+    dragging = false;
+    btn.classList.remove('dragging');
+    try { btn.releasePointerCapture(pid); } catch (err) {}
+    if (moved) setTimeout(function () { moved = false; }, 0);
+  }
+  btn.addEventListener('pointerup', end);
+  btn.addEventListener('pointercancel', end);
+
+  /* გადატანისას გადასვლა არ უნდა მოხდეს, მხოლოდ ჩვეულებრივ დაჭერაზე */
+  btn.addEventListener('click', function (e) {
+    if (moved) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
+
+  /* ეკრანის ზომის შეცვლისას ღილაკი ეკრანში დარჩეს */
+  window.addEventListener('resize', function () {
+    if (!btn.style.left) return;
+    var w = btn.offsetWidth, h = btn.offsetHeight;
+    btn.style.left = clamp(parseFloat(btn.style.left), 0, window.innerWidth - w) + 'px';
+    btn.style.top  = clamp(parseFloat(btn.style.top), 0, window.innerHeight - h) + 'px';
+  });
+})();
 
 function renderWinners() {
   var box = document.getElementById('winners-box');
