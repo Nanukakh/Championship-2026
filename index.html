@@ -38,7 +38,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    overflow: clip; /* clip (not hidden), so the side column can stay sticky */
+    overflow: clip; /* clip (not hidden), so the side column and top nav can stay sticky */
     position: relative;
   }
 
@@ -53,6 +53,39 @@
   }
   .page-frame::before { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
   .page-frame::after  { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
+
+  /* ---------- ზედა ნავიგაცია ---------- */
+  .top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px 28px;
+    padding: 10px 20px;
+    background: var(--green);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+  .top-nav a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 6px 2px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .top-nav a:hover,
+  .top-nav a:focus-visible {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold);
+    outline: none;
+  }
+  #about, #stats { scroll-margin-top: 70px; }
+  #signup { scroll-margin-top: 30vh; } /* ღილაკი ეკრანის შუაში მოხვდება */
 
   header {
     background: var(--green);
@@ -562,7 +595,7 @@
   /* ---------- Side column: registered teams ---------- */
   .teams-panel {
     position: sticky;
-    top: 24px;
+    top: 64px; /* ნავიგაციის ქვემოთ */
     margin: 48px 0 56px;
     background: var(--white);
     border: 1px solid rgba(26,92,42,0.15);
@@ -662,6 +695,8 @@
 
   @media (max-width: 600px) {
     body { padding: 8px; }
+    .top-nav { gap: 2px 16px; padding: 8px 10px; }
+    .top-nav a { font-size: 0.78rem; }
     header { padding: 24px 16px 20px; }
     .layout { padding: 0 20px; }
     main { padding: 32px 0 32px; }
@@ -683,6 +718,12 @@
 <body>
 <div class="page-frame">
 
+  <nav class="top-nav" aria-label="ნავიგაცია">
+    <a href="#about">ჩემპიონატის შესახებ</a>
+    <a href="#signup">რეგისტრაცია</a>
+    <a href="#stats">სტატისტიკა</a>
+  </nav>
+
   <header>
     <div class="header-inner">
       <a class="hero-section" href="#home" aria-label="მთავარ გვერდზე დაბრუნება">
@@ -701,7 +742,7 @@
       <!-- ===================== მთავარი გვერდი ===================== -->
       <div class="view" id="view-home">
 
-        <section>
+        <section id="about">
           <div class="section-label">
             <div class="line"></div>
             <h2>ჩემპიონატის შესახებ</h2>
@@ -720,11 +761,11 @@
           </div>
         </section>
 
-        <section class="cta-wrap">
+        <section class="cta-wrap" id="signup">
           <a class="cta-btn" href="#register">დარეგისტრირდი</a>
         </section>
 
-        <section>
+        <section id="stats">
           <div class="section-label">
             <div class="line"></div>
             <h2>გამარჯვებული გუნდების სტატისტიკა</h2>
@@ -892,13 +933,25 @@ function el(tag, cls, text) {
   return n;
 }
 
-/* ---------- გვერდების გადართვა (#home / #register) ---------- */
+/* ---------- გვერდების გადართვა (#home / #register) და ნავიგაცია (#about / #signup / #stats) ---------- */
 function route() {
-  var isReg = location.hash === '#register';
+  var h = location.hash;
+  var isReg = h === '#register';
   document.getElementById('view-home').hidden = isReg;
   document.getElementById('view-register').hidden = !isReg;
   document.title = isReg ? 'რეგისტრაცია · ' + BASE_TITLE : BASE_TITLE;
-  window.scrollTo(0, 0);
+
+  var target = null;
+  if (!isReg && (h === '#about' || h === '#signup' || h === '#stats')) {
+    target = document.getElementById(h.slice(1));
+  }
+  if (target) {
+    requestAnimationFrame(function () {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  } else {
+    window.scrollTo(0, 0);
+  }
 }
 window.addEventListener('hashchange', route);
 
