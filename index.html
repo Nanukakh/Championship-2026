@@ -346,12 +346,17 @@
   /* ---------- Merchandise / Hoodie Grid ---------- */
   .merch-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    max-width: 700px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 860px;
     margin: 0 auto;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
+    .merch-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 500px) {
     .merch-grid {
       grid-template-columns: 1fr;
     }
@@ -361,7 +366,7 @@
     border: 1px solid rgba(26,92,42,0.15);
     border-top: 3px solid var(--gold);
     border-radius: 6px;
-    padding: 20px;
+    padding: 20px 16px;
     text-align: center;
     box-shadow: 0 6px 20px rgba(26,92,42,0.08);
     display: flex;
@@ -371,7 +376,7 @@
   }
   .merch-card img {
     width: 100%;
-    height: 220px;
+    height: 190px;
     object-fit: contain;
     border-radius: 4px;
     margin-bottom: 14px;
@@ -379,7 +384,7 @@
   }
   .merch-card h3 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-weight: 700;
     color: var(--green);
     margin-bottom: 6px;
@@ -777,7 +782,7 @@
   <nav class="top-nav" aria-label="ნავიგაცია">
     <a href="#about">ჩემპიონატის შესახებ</a>
     <a href="#signup">რეგისტრაცია</a>
-    <a href="#hoodie">შავი ჰუდი / მერჩი</a>
+    <a href="#hoodie">საჩუქრები</a>
     <a href="#stats">სტატისტიკა</a>
   </nav>
 
@@ -831,7 +836,7 @@
         </section>
       </div>
 
-      <!-- ===================== ჰუდი და მერჩის გვერდი ===================== -->
+      <!-- ===================== საჩუქრები მოაზროვნეებისთვის ===================== -->
       <div class="view" id="view-hoodie" hidden>
         <a class="back-link" href="#home">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -840,13 +845,13 @@
         <section>
           <div class="section-label">
             <div class="line"></div>
-            <h2>შავი ჰუდი &amp; მერჩი</h2>
+            <h2>საჩუქრები მოაზროვნეებისთვის</h2>
             <div class="line rev"></div>
           </div>
           <div class="merch-grid">
             <!-- შავი ჰუდი -->
             <div class="merch-card">
-              <img src="hoodie.png" alt="შავი ჰუდი">
+              <img src="hoodie.png" alt="შავი ჰუდი" id="hoodie-img-element">
               <h3>შავი ჰუდი</h3>
               <div class="merch-price">40₾</div>
               <button type="button" class="btn-reg btn-submit" onclick="openProductModal('hoodie')">ყიდვა</button>
@@ -857,6 +862,13 @@
               <h3>მერჩი</h3>
               <div class="merch-price">50₾</div>
               <button type="button" class="btn-reg btn-submit" onclick="openProductModal('merch')">ყიდვა</button>
+            </div>
+            <!-- NFC ბრელოკი -->
+            <div class="merch-card">
+              <img src="keychain.png" id="keychain-img-element" alt="NFC ბრელოკი" onerror="if(this.src.indexOf('.jpg')===-1) this.src='keychain.jpg';">
+              <h3>NFC ბრელოკი</h3>
+              <div class="merch-price">10₾</div>
+              <button type="button" class="btn-reg btn-submit" onclick="openProductModal('keychain')">ყიდვა</button>
             </div>
           </div>
         </section>
@@ -1013,7 +1025,7 @@
       </div>
       <button class="copy-btn" id="hoodie-copy-btn" type="button" onclick="copyHoodieIBAN()">IBAN-ის კოპირება</button>
       <div class="pay-recipe" style="font-size:0.82rem; margin-top:14px; padding-top:10px; border-top:1px solid rgba(0,0,0,0.1);">
-        <strong>მნიშვნელოვანი:</strong> გადახდის დანიშნულებაში მიუთითეთ სახელი, გვარი, პროდუქტი (<span id="pay-prod-label">შავი ჰუდი</span>) და ზომა: <strong id="pay-size-label"></strong>
+        <strong>მნიშვნელოვანი:</strong> გადახდის დანიშნულებაში მიუთითეთ სახელი, გვარი, პროდუქტი (<span id="pay-prod-label">შავი ჰუდი</span>)<span id="pay-size-wrapper"> და ზომა: <strong id="pay-size-label"></strong></span>
       </div>
     </div>
   </div>
@@ -1044,7 +1056,7 @@ function route() {
   var isHoodie = h === '#hoodie';
   var isHome = !isReg && !isHoodie;
 
-  /* ჰედერისა და გვერდითი სვეტის დამალვა */
+  /* ჰედერისა და გვერდითი сვეტის დამალვა */
   if (isHome) {
     document.body.classList.remove('hide-header', 'hide-sidebar');
   } else {
@@ -1056,7 +1068,7 @@ function route() {
   document.getElementById('view-hoodie').hidden = !isHoodie;
 
   document.title = isReg ? 'რეგისტრაცია · ' + BASE_TITLE
-                 : isHoodie ? 'შავი ჰუდი & მერჩი · ' + BASE_TITLE
+                 : isHoodie ? 'საჩუქრები მოაზროვნეებისთვის · ' + BASE_TITLE
                  : BASE_TITLE;
 
   if (!isHoodie) closeHoodie();
@@ -1272,18 +1284,38 @@ function openProductModal(prod) {
   document.getElementById('size-error').textContent = '';
   document.querySelectorAll('.size-btn').forEach(function (b) { b.classList.remove('selected'); });
 
+  var sizeTitle = document.getElementById('size-title-label');
+  var sizeGrid = document.getElementById('size-grid');
+  var sizeWrap = document.getElementById('pay-size-wrapper');
+
   if (prod === 'merch') {
     document.getElementById('modal-title').textContent = 'მერჩი';
     document.getElementById('modal-img').src = document.getElementById('merch-img-element').src;
     document.getElementById('modal-price').textContent = 'ფასი: 50₾';
     document.getElementById('pay-price-label').textContent = '50₾';
     document.getElementById('pay-prod-label').textContent = 'მერჩი';
+    sizeTitle.style.display = 'block';
+    sizeGrid.style.display = 'flex';
+    if(sizeWrap) sizeWrap.style.display = 'inline';
+  } else if (prod === 'keychain') {
+    document.getElementById('modal-title').textContent = 'NFC ბრელოკი';
+    document.getElementById('modal-img').src = document.getElementById('keychain-img-element').src;
+    document.getElementById('modal-price').textContent = 'ფასი: 10₾';
+    document.getElementById('pay-price-label').textContent = '10₾';
+    document.getElementById('pay-prod-label').textContent = 'NFC ბრელოკი';
+    sizeTitle.style.display = 'none';
+    sizeGrid.style.display = 'none';
+    if(sizeWrap) sizeWrap.style.display = 'none';
+    hoodieSize = 'N/A'; // ზომა არ სჭირდება
   } else {
     document.getElementById('modal-title').textContent = 'შავი ჰუდი';
-    document.getElementById('modal-img').src = 'hoodie.png';
+    document.getElementById('modal-img').src = document.getElementById('hoodie-img-element').src;
     document.getElementById('modal-price').textContent = 'ფასი: 40₾';
     document.getElementById('pay-price-label').textContent = '40₾';
     document.getElementById('pay-prod-label').textContent = 'შავი ჰუდი';
+    sizeTitle.style.display = 'block';
+    sizeGrid.style.display = 'flex';
+    if(sizeWrap) sizeWrap.style.display = 'inline';
   }
 
   var ov = document.getElementById('hoodie-overlay');
@@ -1309,11 +1341,13 @@ function pickSize(s) {
 }
 
 function buyHoodie() {
-  if (!hoodieSize) {
+  if (currentProduct !== 'keychain' && !hoodieSize) {
     document.getElementById('size-error').textContent = 'გთხოვთ, აირჩიოთ ზომა';
     return;
   }
-  document.getElementById('pay-size-label').textContent = hoodieSize;
+  if (currentProduct !== 'keychain') {
+    document.getElementById('pay-size-label').textContent = hoodieSize;
+  }
   document.getElementById('hoodie-modal').classList.add('paying');
 }
 
