@@ -334,7 +334,7 @@
   }
   .gallery-item img {
     display: block;
-    height: 200px;
+    height: 280px;
     width: auto;
     user-select: none;
     -webkit-user-drag: none;
@@ -344,7 +344,7 @@
     to   { transform: translateX(-50%); }
   }
   @media (max-width: 600px) {
-    .gallery-item img { height: 150px; }
+    .gallery-item img { height: 200px; }
     .gallery-item { margin-right: 18px; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -887,6 +887,12 @@
     <main>
       <!-- ===================== მთავარი გვერდი ===================== -->
       <div class="view" id="view-home">
+        <section id="gallery" hidden aria-label="ფოტოგალერეა">
+          <div class="gallery-viewport">
+            <div class="gallery-track" id="gallery-track"></div>
+          </div>
+        </section>
+
         <section id="about">
           <div class="section-label">
             <div class="line"></div>
@@ -903,12 +909,6 @@
             <div class="about-item">
               <p>გამარჯვებული გუნდი მოიპოვებს 2026 წლის ზამთრის სერიის კამპუსის ინტელექტუალური ჩემპიონის ტიტულს.</p>
             </div>
-          </div>
-        </section>
-
-        <section id="gallery" hidden aria-label="ფოტოგალერეა">
-          <div class="gallery-viewport">
-            <div class="gallery-track" id="gallery-track"></div>
           </div>
         </section>
 
