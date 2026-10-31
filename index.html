@@ -311,6 +311,8 @@
   }
 
   /* ---------- ფოტოების მოძრავი ზოლი ---------- */
+  #gallery { padding: 28px 20px 0; }
+  body.hide-header #gallery { display: none !important; }
   .gallery-viewport {
     overflow: hidden;
     padding: 8px 0;
@@ -883,16 +885,17 @@
     </div>
   </header>
 
+  <!-- ფოტოების მოძრავი ზოლი: მთლიან სიგანეზე, მხოლოდ მთავარ გვერდზე -->
+  <section id="gallery" hidden aria-label="ფოტოგალერეა">
+    <div class="gallery-viewport">
+      <div class="gallery-track" id="gallery-track"></div>
+    </div>
+  </section>
+
   <div class="layout">
     <main>
       <!-- ===================== მთავარი გვერდი ===================== -->
       <div class="view" id="view-home">
-        <section id="gallery" hidden aria-label="ფოტოგალერეა">
-          <div class="gallery-viewport">
-            <div class="gallery-track" id="gallery-track"></div>
-          </div>
-        </section>
-
         <section id="about">
           <div class="section-label">
             <div class="line"></div>
@@ -1576,7 +1579,7 @@ function buildGallery() {
   var sec = document.getElementById('gallery');
   var vp = sec.querySelector('.gallery-viewport');
   var track = document.getElementById('gallery-track');
-  if (document.getElementById('view-home').hidden) return;   // მთავარი გვერდი დამალულია
+  if (document.body.classList.contains('hide-header')) return;   // მთავარი გვერდი დამალულია
   sec.hidden = false;
   var W = vp.clientWidth;
   if (!W || W === galleryBuiltW) return;
