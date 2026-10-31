@@ -310,6 +310,48 @@
     .about-item + .about-item { border-left: none; border-top: 1px solid rgba(26,92,42,0.12); }
   }
 
+  /* ---------- ფოტოების მოძრავი ზოლი ---------- */
+  .gallery-viewport {
+    overflow: hidden;
+    padding: 8px 0;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  }
+  .gallery-track {
+    display: flex;
+    width: max-content;
+    animation: galleryScroll 60s linear infinite;
+    will-change: transform;
+  }
+  .gallery-item {
+    flex: 0 0 auto;
+    margin-right: 24px;
+    line-height: 0;
+    border: 3px solid var(--green);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--gold);
+  }
+  .gallery-item img {
+    display: block;
+    height: 200px;
+    width: auto;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  @keyframes galleryScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (max-width: 600px) {
+    .gallery-item img { height: 150px; }
+    .gallery-item { margin-right: 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-track { animation: none; }
+    .gallery-viewport { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  }
+
   /* ---------- Big register button ---------- */
   .cta-wrap { display: flex; justify-content: center; }
   .cta-btn {
@@ -864,6 +906,12 @@
           </div>
         </section>
 
+        <section id="gallery" hidden aria-label="ფოტოგალერეა">
+          <div class="gallery-viewport">
+            <div class="gallery-track" id="gallery-track"></div>
+          </div>
+        </section>
+
         <section class="cta-wrap" id="signup">
           <a class="cta-btn" href="#register">დარეგისტრირდი</a>
         </section>
@@ -1141,6 +1189,7 @@ function route() {
   } else {
     window.scrollTo(0, 0);
   }
+  if (isHome) requestAnimationFrame(buildGallery);
 }
 window.addEventListener('hashchange', route);
 
@@ -1489,8 +1538,97 @@ document.getElementById('hoodie-overlay').addEventListener('click', function (e)
 });
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeHoodie(); });
 
+/* ---------- ფოტოების მოძრავი ზოლი ----------
+   ფოტოები ჩაიდოს index.html-ის გვერდით და დაერქვას: photo1.jpg, photo2.jpg ... photo10.jpg
+   (გაფართოება შეიძლება იყოს jpg, jpeg, png ან webp). რაც ფაილი არსებობს, ის გამოჩნდება. */
+var GALLERY_MAX = 10;
+var GALLERY_EXTS = ['jpg', 'jpeg', 'png', 'webp'];
+var GALLERY_SPEED = 35;      // სიჩქარე პიქსელი/წამში (მცირე რიცხვი = უფრო ნელა)
+var galleryPhotos = [];
+var galleryBuiltW = 0;
+var galleryToken = 0;
+
+function loadGalleryPhoto(i) {
+  return new Promise(function (resolve) {
+    var k = 0;
+    (function tryNext() {
+      if (k >= GALLERY_EXTS.length) { resolve(null); return; }
+      var src = 'photo' + i + '.' + GALLERY_EXTS[k++];
+      var img = new Image();
+      img.onload = function () { resolve(src); };
+      img.onerror = tryNext;
+      img.src = src;
+    })();
+  });
+}
+
+function initGallery() {
+  var jobs = [];
+  for (var i = 1; i <= GALLERY_MAX; i++) jobs.push(loadGalleryPhoto(i));
+  Promise.all(jobs).then(function (list) {
+    galleryPhotos = list.filter(Boolean);
+    buildGallery();
+  });
+}
+
+function buildGallery() {
+  if (!galleryPhotos.length) return;
+  var sec = document.getElementById('gallery');
+  var vp = sec.querySelector('.gallery-viewport');
+  var track = document.getElementById('gallery-track');
+  if (document.getElementById('view-home').hidden) return;   // მთავარი გვერდი დამალულია
+  sec.hidden = false;
+  var W = vp.clientWidth;
+  if (!W || W === galleryBuiltW) return;
+  var token = ++galleryToken;
+
+  track.style.animation = 'none';
+  track.textContent = '';
+  var first = [];
+  galleryPhotos.forEach(function (src, n) {
+    var item = el('div', 'gallery-item');
+    var img = document.createElement('img');
+    img.src = src;
+    img.alt = 'ჩემპიონატის ფოტო ' + (n + 1);
+    img.draggable = false;
+    item.appendChild(img);
+    track.appendChild(item);
+    first.push(item);
+  });
+
+  var waits = first.map(function (item) {
+    var img = item.firstChild;
+    return (img.complete && img.naturalWidth) ? Promise.resolve()
+      : new Promise(function (r) { img.onload = img.onerror = r; });
+  });
+  Promise.all(waits).then(function () {
+    if (token !== galleryToken) return;
+    var setW = track.getBoundingClientRect().width;
+    if (!setW) return;
+    var perHalf = Math.max(1, Math.ceil(W / setW));
+    var totalSets = perHalf * 2;                       // ლუწი რაოდენობა = უწყვეტი მარყუჟი
+    for (var s = 1; s < totalSets; s++) {
+      first.forEach(function (item) {
+        var c = item.cloneNode(true);
+        c.setAttribute('aria-hidden', 'true');
+        track.appendChild(c);
+      });
+    }
+    track.style.animation = '';
+    track.style.animationDuration = Math.round((perHalf * setW) / GALLERY_SPEED) + 's';
+    galleryBuiltW = W;
+  });
+}
+
+var galleryResizeTimer = null;
+window.addEventListener('resize', function () {
+  clearTimeout(galleryResizeTimer);
+  galleryResizeTimer = setTimeout(buildGallery, 200);
+});
+
 buildMembersForm();
 renderWinners();
+initGallery();
 route();
 fetchTeams();
 setInterval(function () { if (!document.hidden) fetchTeams(); }, TEAMS_REFRESH_MS);
