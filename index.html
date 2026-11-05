@@ -1158,12 +1158,9 @@ function route() {
   var isStats = h === '#stats';
   var isHome = !isReg && !isHoodie && !isStats;
 
-  /* ჰედერისა და გვერდითი სვეტის დამალვა არამთავარ გვერდებზე */
-  if (isHome) {
-    document.body.classList.remove('hide-header', 'hide-sidebar');
-  } else {
-    document.body.classList.add('hide-header', 'hide-sidebar');
-  }
+  /* ჰედერი იმალება არამთავარ გვერდებზე; გვერდითი სვეტი (გუნდების სია) ჩანს მთავარ და სარეგისტრაციო გვერდზე */
+  document.body.classList.toggle('hide-header', !isHome);
+  document.body.classList.toggle('hide-sidebar', !isHome && !isReg);
   /* მაღაზიის გვერდი ცოტათი უფრო ფართოა */
   document.body.classList.toggle('wide-main', isHoodie);
 
@@ -1413,6 +1410,9 @@ function submitReg() {
   .then(function() {
     showSuccess(name, capF, capL, phone, members);
     addLocalTeam(name);
+    /* სერვერიდან სიის გადატვირთვა, რომ ცხრილთან სინქრონში იყოს */
+    setTimeout(fetchTeams, 2500);
+    setTimeout(fetchTeams, 8000);
   })
   .catch(function() {
     submitBtn.disabled = false;
