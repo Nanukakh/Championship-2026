@@ -49,7 +49,6 @@
   }
   .page-frame::before { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
   .page-frame::after  { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
-
   /* ---------- მცურავი ღილაკი (პატარა + გადასატანი) ---------- */
   .floating-hoodie-btn {
     position: fixed;
@@ -97,7 +96,6 @@
   @media (max-width: 600px) {
     .floating-hoodie-btn { width: 110px; height: 110px; font-size: 0.95rem; padding: 10px; left: 10px; top: calc(50% - 55px); }
   }
-
   /* ---------- ზედა ნავიგაცია ---------- */
   .top-nav {
     position: sticky;
@@ -129,8 +127,6 @@
     outline: none;
   }
   #about { scroll-margin-top: 70px; }
-
-  /* ჰედერის დამალვის წესი */
   header {
     background: var(--green);
     padding: 14px 40px 12px;
@@ -143,7 +139,6 @@
   header[hidden] {
     display: none !important;
   }
-
   header::after {
     content: '';
     display: block;
@@ -216,8 +211,6 @@
     border-radius: 20px;
     margin-top: -4px;
   }
-
-  /* ---------- Layout & ცენტრირება ---------- */
   .layout {
     flex: 1;
     width: 100%;
@@ -240,7 +233,6 @@
     main { grid-column: 2; grid-row: 1; }
     .teams-panel { grid-column: 3; grid-row: 1; }
   }
-
   body.hide-sidebar .layout {
     display: flex !important;
     justify-content: center !important;
@@ -251,14 +243,12 @@
     max-width: 860px !important;
     margin: 0 auto !important;
   }
-  /* მაღაზიის გვერდი ცოტათი უფრო ფართოა */
   body.hide-sidebar.wide-main main {
     max-width: 1040px !important;
   }
   body.hide-sidebar .teams-panel {
     display: none !important;
   }
-
   main {
     min-width: 0;
     padding: 48px 0 56px;
@@ -285,8 +275,6 @@
     letter-spacing: 0.04em;
     text-align: center;
   }
-
-  /* ---------- საინფორმაციო ველი ---------- */
   .about-panel {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -309,8 +297,6 @@
     .about-panel { grid-template-columns: 1fr; }
     .about-item + .about-item { border-left: none; border-top: 1px solid rgba(26,92,42,0.12); }
   }
-
-  /* ---------- ფოტოების მოძრავი ზოლი ---------- */
   #gallery { padding: 28px 20px 0; }
   body.hide-header #gallery { display: none !important; }
   .gallery-viewport {
@@ -352,8 +338,6 @@
     .gallery-track { animation: none; }
     .gallery-viewport { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
   }
-
-  /* ---------- Big register button ---------- */
   .cta-wrap { display: flex; justify-content: center; }
   .cta-btn {
     display: inline-flex;
@@ -376,8 +360,6 @@
     transform: translateY(-3px);
     box-shadow: 0 14px 32px rgba(212,160,23,0.45), inset 0 -3px 0 rgba(26,92,42,0.18);
   }
-
-  /* ---------- Winners (სტატისტიკის გვერდი) ---------- */
   .winners-empty {
     border: 1.5px dashed rgba(26,92,42,0.25);
     background: var(--off-white);
@@ -404,8 +386,6 @@
   .winner-card .w-year { font-size: 0.78rem; font-weight: 600; color: var(--text-light); letter-spacing: 0.08em; }
   .winner-card .w-team { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--green); margin: 6px 0 4px; overflow-wrap: anywhere; }
   .winner-card .w-score { font-size: 0.85rem; color: var(--text-mid); }
-
-  /* ---------- Back link ---------- */
   .back-link {
     display: inline-flex;
     align-items: center;
@@ -418,8 +398,6 @@
     margin-bottom: -16px;
   }
   .back-link:hover { text-decoration: underline; }
-
-  /* ---------- Merchandise / Hoodie Grid ---------- */
   .merch-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -428,14 +406,10 @@
     margin: 0 auto;
   }
   @media (max-width: 768px) {
-    .merch-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    .merch-grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 500px) {
-    .merch-grid {
-      grid-template-columns: 1fr;
-    }
+    .merch-grid { grid-template-columns: 1fr; }
   }
   .merch-card {
     background: var(--white);
@@ -450,7 +424,6 @@
     align-items: center;
     justify-content: flex-start;
   }
-  /* ჩარჩო ზუსტად ფოტოს კიდეებზე: ფოტო თავისი პროპორციით, ჩარჩო პირდაპირ მის გარშემო */
   .merch-photo {
     display: block;
     width: 100%;
@@ -479,8 +452,6 @@
     margin-bottom: 16px;
   }
   .merch-card .btn-reg { margin-top: auto; padding: 12px 34px; }
-
-  /* ---------- Payment ---------- */
   .payment-box {
     background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
     border-radius: 8px;
@@ -562,7 +533,6 @@
   }
   .copy-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
   .copy-btn.copied { background: #4caf6a; color: white; }
-
   footer {
     text-align: center;
     padding: 20px 32px;
@@ -572,8 +542,6 @@
     background: var(--off-white);
   }
   footer span { color: var(--green); font-weight: 500; }
-
-  /* ---------- Registration form ---------- */
   .reg-form-wrap {
     background: var(--off-white);
     border: 1px solid rgba(26,92,42,0.15);
@@ -696,7 +664,6 @@
   .btn-next { background: var(--green); color: white; }
   .btn-back { background: transparent; color: var(--text-light); border: 1px solid rgba(26,92,42,0.2) !important; }
   .btn-submit { background: var(--gold); color: var(--green); }
-
   .reg-error {
     margin-top: 16px;
     padding: 10px 14px;
@@ -719,8 +686,6 @@
   .team-summary { background: var(--off-white); border: 1px solid rgba(26,92,42,0.15); border-radius: 6px; padding: 20px 24px; margin-top: 20px; text-align: left; }
   .team-summary-title { font-size: 0.72rem; font-weight: 600; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
   .team-member-row { font-size: 0.85rem; color: var(--text-mid); padding: 5px 0; border-bottom: 1px solid rgba(26,92,42,0.07); }
-
-  /* ---------- Side column ---------- */
   .teams-panel {
     position: sticky;
     top: 64px;
@@ -793,8 +758,6 @@
     70% { box-shadow: 0 0 0 7px rgba(47,178,90,0); }
     100% { box-shadow: 0 0 0 0 rgba(47,178,90,0); }
   }
-
-  /* Modal window */
   .hoodie-overlay {
     position: fixed; inset: 0; z-index: 100;
     background: rgba(10,30,15,0.6);
@@ -850,7 +813,6 @@
   .hoodie-modal.paying .hoodie-choose { display: none; }
   .hoodie-modal.paying .hoodie-pay { display: block; }
   body.modal-open { overflow: hidden; }
-
   @media (max-width: 960px) {
     .layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 0 28px; }
     .teams-panel { position: static; margin: 0 0 40px; }
@@ -858,10 +820,7 @@
 </style>
 </head>
 <body>
-
-<!-- მცურავი ღილაკი: შეგიძლიათ მოკიდოთ ხელი და გადაიტანოთ -->
 <a class="floating-hoodie-btn" id="floating-hoodie" href="#hoodie" draggable="false" title="გადაიტანეთ სასურველ ადგილას">შავი<br>ჰუდი</a>
-
 <div class="page-frame">
   <nav class="top-nav" aria-label="ნავიგაცია">
     <a href="#about">ჩემპიონატის შესახებ</a>
@@ -869,8 +828,6 @@
     <a href="#hoodie">მოაზროვნეებისთვის</a>
     <a href="#stats">სტატისტიკა</a>
   </nav>
-
-  <!-- ჰედერი -->
   <header id="main-header">
     <div class="header-inner">
       <a class="hero-section" href="#home" aria-label="მთავარ გვერდზე დაბრუნება">
@@ -882,17 +839,13 @@
       </a>
     </div>
   </header>
-
-  <!-- ფოტოების მოძრავი ზოლი: მთლიან სიგანეზე, მხოლოდ მთავარ გვერდზე -->
   <section id="gallery" hidden aria-label="ფოტოგალერეა">
     <div class="gallery-viewport">
       <div class="gallery-track" id="gallery-track"></div>
     </div>
   </section>
-
   <div class="layout">
     <main>
-      <!-- ===================== მთავარი გვერდი ===================== -->
       <div class="view" id="view-home">
         <section id="about">
           <div class="section-label">
@@ -912,13 +865,10 @@
             </div>
           </div>
         </section>
-
         <section class="cta-wrap" id="signup">
           <a class="cta-btn" href="#register">დარეგისტრირდი</a>
         </section>
       </div>
-
-      <!-- ===================== სტატისტიკის გვერდი ===================== -->
       <div class="view" id="view-stats" hidden>
         <a class="back-link" href="#home">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -933,8 +883,6 @@
           <div id="winners-box"></div>
         </section>
       </div>
-
-      <!-- ===================== საჩუქრები მოაზროვნეებისთვის ===================== -->
       <div class="view" id="view-hoodie" hidden>
         <a class="back-link" href="#home">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -947,21 +895,18 @@
             <div class="line rev"></div>
           </div>
           <div class="merch-grid">
-            <!-- შავი ჰუდი -->
             <div class="merch-card">
               <div class="merch-photo"><img src="hoodie.png" alt="შავი ჰუდი" id="hoodie-img-element"></div>
               <h3>შავი ჰუდი</h3>
               <div class="merch-price">40₾</div>
               <button type="button" class="btn-reg btn-submit" onclick="openProductModal('hoodie')">ყიდვა</button>
             </div>
-            <!-- მერჩი -->
             <div class="merch-card">
               <div class="merch-photo"><img src="merch.jpg" id="merch-img-element" alt="მერჩი" onerror="if(this.src.indexOf('.png')===-1) this.src='merch.png';"></div>
               <h3>მერჩი</h3>
               <div class="merch-price">50₾</div>
               <button type="button" class="btn-reg btn-submit" onclick="openProductModal('merch')">ყიდვა</button>
             </div>
-            <!-- NFC ბრელოკი -->
             <div class="merch-card">
               <div class="merch-photo"><img src="keychain.png" id="keychain-img-element" alt="NFC ბრელოკი" onerror="if(this.src.indexOf('.jpg')===-1) this.src='keychain.jpg';"></div>
               <h3>NFC ბრელოკი</h3>
@@ -971,8 +916,6 @@
           </div>
         </section>
       </div>
-
-      <!-- ===================== სარეგისტრაციო გვერდი ===================== -->
       <div class="view" id="view-register" hidden>
         <a class="back-link" href="#home">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -1075,8 +1018,6 @@
         </section>
       </div>
     </main>
-
-    <!-- ===================== გვერდითი სვეტი ===================== -->
     <aside class="teams-panel" aria-label="დარეგისტრირებული გუნდები">
       <div class="teams-head">
         <div class="teams-title">დარეგისტრირებული გუნდები</div>
@@ -1088,13 +1029,10 @@
       <div class="teams-foot"><span class="live-dot"></span> სია ავტომატურად ახლდება</div>
     </aside>
   </div>
-
   <footer>
     <p>© 2026 &nbsp;·&nbsp; <span>თავისუფალი უნივერსიტეტი</span> &amp; <span>აგრარული უნივერსიტეტი</span> &nbsp;·&nbsp; კამპუსის ინტელექტუალური ჩემპიონატი</p>
   </footer>
 </div>
-
-<!-- Modal window -->
 <div class="hoodie-overlay" id="hoodie-overlay" aria-hidden="true">
   <div class="hoodie-modal" id="hoodie-modal" role="dialog" aria-modal="true">
     <button type="button" class="hoodie-close" onclick="closeHoodie()">&times;</button>
@@ -1128,15 +1066,11 @@
     </div>
   </div>
 </div>
-
 <script>
 var BASE_TITLE = document.title;
 var SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw-cDtH3ha6uD31-UIC_a-Q8H6GeRHtD6EMlETealEGVxXvt6kXTV61VKdLC64CFA0d/exec';
 var TEAMS_URL = SHEETS_URL;
 var TEAMS_REFRESH_MS = 20000;
-
-/* გამარჯვებულები — აქ დაამატეთ ჩემპიონატის შემდეგ. მაგალითი:
-   { year: '2026', place: 1, team: 'გუნდის სახელი', score: '120 ქულა' } */
 var WINNERS = [];
 
 function esc(s) {
@@ -1150,32 +1084,24 @@ function el(tag, cls, text) {
   if (text !== undefined) n.textContent = text;
   return n;
 }
-
 function route() {
   var h = location.hash;
   var isReg = h === '#register';
   var isHoodie = h === '#hoodie';
   var isStats = h === '#stats';
   var isHome = !isReg && !isHoodie && !isStats;
-
-  /* ჰედერი იმალება არამთავარ გვერდებზე; გვერდითი სვეტი (გუნდების სია) ჩანს მთავარ და სარეგისტრაციო გვერდზე */
   document.body.classList.toggle('hide-header', !isHome);
   document.body.classList.toggle('hide-sidebar', !isHome && !isReg);
-  /* მაღაზიის გვერდი ცოტათი უფრო ფართოა */
   document.body.classList.toggle('wide-main', isHoodie);
-
   document.getElementById('view-home').hidden = !isHome;
   document.getElementById('view-register').hidden = !isReg;
   document.getElementById('view-hoodie').hidden = !isHoodie;
   document.getElementById('view-stats').hidden = !isStats;
-
   document.title = isReg ? 'რეგისტრაცია · ' + BASE_TITLE
                  : isHoodie ? 'საჩუქრები მოაზროვნეებისთვის · ' + BASE_TITLE
                  : isStats ? 'სტატისტიკა · ' + BASE_TITLE
                  : BASE_TITLE;
-
   if (!isHoodie) closeHoodie();
-
   var target = null;
   if (isHome && h === '#about') {
     target = document.getElementById('about');
@@ -1191,19 +1117,15 @@ function route() {
 }
 window.addEventListener('hashchange', route);
 
-/* ---------- მცურავი ღილაკის გადატანა (მაუსით და თითით) ---------- */
 (function () {
   var btn = document.getElementById('floating-hoodie');
   var startX, startY, offX, offY, dragging = false, moved = false, pid = null;
-
   function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
-
   btn.addEventListener('dragstart', function (e) { e.preventDefault(); });
-
   btn.addEventListener('pointerdown', function (e) {
     if (e.pointerType === 'mouse' && e.button !== 0) return;
     dragging = true; moved = false; pid = e.pointerId;
-    btn.classList.add('dragging');           // ანიმაცია ჩერდება
+    btn.classList.add('dragging');
     var r = btn.getBoundingClientRect();
     btn.style.left = r.left + 'px';
     btn.style.top  = r.top + 'px';
@@ -1212,7 +1134,6 @@ window.addEventListener('hashchange', route);
     startX = e.clientX; startY = e.clientY;
     try { btn.setPointerCapture(pid); } catch (err) {}
   });
-
   btn.addEventListener('pointermove', function (e) {
     if (!dragging || e.pointerId !== pid) return;
     if (!moved && Math.abs(e.clientX - startX) + Math.abs(e.clientY - startY) < 6) return;
@@ -1221,7 +1142,6 @@ window.addEventListener('hashchange', route);
     btn.style.left = clamp(e.clientX - offX, 0, window.innerWidth - w) + 'px';
     btn.style.top  = clamp(e.clientY - offY, 0, window.innerHeight - h) + 'px';
   });
-
   function end(e) {
     if (!dragging || (e && e.pointerId !== pid)) return;
     dragging = false;
@@ -1231,13 +1151,9 @@ window.addEventListener('hashchange', route);
   }
   btn.addEventListener('pointerup', end);
   btn.addEventListener('pointercancel', end);
-
-  /* გადატანისას გადასვლა არ უნდა მოხდეს, მხოლოდ ჩვეულებრივ დაჭერაზე */
   btn.addEventListener('click', function (e) {
     if (moved) { e.preventDefault(); e.stopPropagation(); }
   }, true);
-
-  /* ეკრანის ზომის შეცვლისას ღილაკი ეკრანში დარჩეს */
   window.addEventListener('resize', function () {
     if (!btn.style.left) return;
     var w = btn.offsetWidth, h = btn.offsetHeight;
@@ -1272,7 +1188,6 @@ function renderWinners() {
 var serverTeams = [];
 var localTeams = [];
 var teamsStatus = 'loading';
-var shownKeys = null;
 var lastSig = null;
 
 function allTeams() {
@@ -1283,7 +1198,6 @@ function allTeams() {
   });
   return out;
 }
-
 function renderTeams() {
   var list = allTeams();
   var sig = teamsStatus + '|' + list.join('\u0001');
@@ -1307,16 +1221,35 @@ function renderTeams() {
   }
 }
 
+/* განახლებული fetchTeams ფუნქცია, რომელიც აგვარებს მონაცემთა წამოღების და ფორმატის პრობლემებს */
 function fetchTeams() {
-  return fetch(TEAMS_URL + '?action=teams&t=' + Date.now())
+  return fetch(TEAMS_URL + '?action=teams&t=' + Date.now(), {
+    method: 'GET',
+    mode: 'cors'
+  })
     .then(function (r) { return r.json(); })
     .then(function (data) {
-      var arr = Array.isArray(data) ? data : ((data && data.teams) || []);
-      serverTeams = arr.map(function (t) { return String(t).trim(); }).filter(Boolean);
+      var arr = [];
+      if (Array.isArray(data)) {
+        arr = data;
+      } else if (data && Array.isArray(data.teams)) {
+        arr = data.teams;
+      } else if (data && data.data && Array.isArray(data.data)) {
+        arr = data.data;
+      }
+      
+      serverTeams = arr.map(function (t) { 
+        if (typeof t === 'object' && t !== null) {
+          return String(t.teamName || t.name || Object.values(t)[0] || '').trim();
+        }
+        return String(t).trim(); 
+      }).filter(Boolean);
+      
       teamsStatus = 'ok';
       renderTeams();
     })
-    .catch(function () {
+    .catch(function (err) {
+      console.error("გუნდების ჩატვირთვის შეცდომა:", err);
       if (teamsStatus !== 'ok') teamsStatus = 'error';
       renderTeams();
     });
@@ -1326,7 +1259,6 @@ function addLocalTeam(name) {
   localTeams.push(name);
   renderTeams();
 }
-
 function buildMembersForm() {
   var container = document.getElementById('members-container');
   container.innerHTML = '';
@@ -1334,7 +1266,6 @@ function buildMembersForm() {
     container.innerHTML += '<div class="member-card"><div class="member-card-header"><div class="member-num">' + i + '</div>მონაწილე ' + i + '</div><div class="field-row"><div class="field-group"><label>სახელი *</label><input type="text" id="m' + i + '-first" placeholder="სახელი"></div><div class="field-group"><label>გვარი *</label><input type="text" id="m' + i + '-last" placeholder="გვარი"></div></div></div>';
   }
 }
-
 function validateStep1() {
   var fields = ['team-name','cap-first','cap-last','cap-phone'];
   var ok = true;
@@ -1345,7 +1276,6 @@ function validateStep1() {
   });
   return ok;
 }
-
 function validateStep2() {
   var ok = true;
   for (var i = 1; i <= 5; i++) {
@@ -1357,7 +1287,6 @@ function validateStep2() {
   }
   return ok;
 }
-
 function buildSummary() {
   var name  = document.getElementById('team-name').value.trim();
   var capF  = document.getElementById('cap-first').value.trim();
@@ -1372,7 +1301,6 @@ function buildSummary() {
   rows += '</div>';
   return rows;
 }
-
 function goStep(n) {
   if (n === 2 && !validateStep1()) return;
   if (n === 3 && !validateStep2()) return;
@@ -1385,7 +1313,6 @@ function goStep(n) {
   });
   document.getElementById('step-' + n).classList.add('active');
 }
-
 function submitReg() {
   var submitBtn = document.querySelector('#step-3 .btn-submit');
   var errBox = document.getElementById('reg-error');
@@ -1393,7 +1320,6 @@ function submitReg() {
   errBox.hidden = true;
   submitBtn.disabled = true;
   submitBtn.textContent = 'იგზავნება...';
-
   var name  = document.getElementById('team-name').value.trim();
   var capF  = document.getElementById('cap-first').value.trim();
   var capL  = document.getElementById('cap-last').value.trim();
@@ -1405,12 +1331,10 @@ function submitReg() {
     members['member' + i] = f + ' ' + l;
   }
   var payload = Object.assign({ teamName: name, captainFirst: capF, captainLast: capL, captainPhone: phone }, members);
-
   fetch(SHEETS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
   .then(function() {
     showSuccess(name, capF, capL, phone, members);
     addLocalTeam(name);
-    /* სერვერიდან სიის გადატვირთვა, რომ ცხრილთან სინქრონში იყოს */
     setTimeout(fetchTeams, 2500);
     setTimeout(fetchTeams, 8000);
   })
@@ -1420,7 +1344,6 @@ function submitReg() {
     errBox.hidden = false;
   });
 }
-
 function showSuccess(name, capF, capL, phone, members) {
   document.querySelectorAll('.reg-step').forEach(function(s){ s.classList.remove('active'); });
   document.querySelectorAll('.reg-step-indicator').forEach(function(ind){ ind.classList.add('done'); });
@@ -1433,7 +1356,6 @@ function showSuccess(name, capF, capL, phone, members) {
   successEl.style.display = 'block';
   successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
-
 function copyIBAN() {
   var iban = document.getElementById('iban-text').textContent;
   var btn  = document.getElementById('copy-btn');
@@ -1446,21 +1368,17 @@ function copyIBAN() {
     }, 2500);
   });
 }
-
 var currentProduct = 'hoodie';
 var hoodieSize = null;
-
 function openProductModal(prod) {
   currentProduct = prod;
   hoodieSize = null;
   document.getElementById('hoodie-modal').classList.remove('paying');
   document.getElementById('size-error').textContent = '';
   document.querySelectorAll('.size-btn').forEach(function (b) { b.classList.remove('selected'); });
-
   var sizeTitle = document.getElementById('size-title-label');
   var sizeGrid = document.getElementById('size-grid');
   var sizeWrap = document.getElementById('pay-size-wrapper');
-
   if (prod === 'merch') {
     document.getElementById('modal-title').textContent = 'მერჩი';
     document.getElementById('modal-img').src = document.getElementById('merch-img-element').src;
@@ -1490,13 +1408,11 @@ function openProductModal(prod) {
     sizeGrid.style.display = 'flex';
     if(sizeWrap) sizeWrap.style.display = 'inline';
   }
-
   var ov = document.getElementById('hoodie-overlay');
   ov.classList.add('open');
   ov.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
 }
-
 function closeHoodie() {
   var ov = document.getElementById('hoodie-overlay');
   if (!ov.classList.contains('open')) return;
@@ -1504,7 +1420,6 @@ function closeHoodie() {
   ov.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('modal-open');
 }
-
 function pickSize(s) {
   hoodieSize = s;
   document.getElementById('size-error').textContent = '';
@@ -1512,7 +1427,6 @@ function pickSize(s) {
     b.classList.toggle('selected', b.textContent === s);
   });
 }
-
 function buyHoodie() {
   if (currentProduct !== 'keychain' && !hoodieSize) {
     document.getElementById('size-error').textContent = 'გთხოვთ, აირჩიოთ ზომა';
@@ -1523,7 +1437,6 @@ function buyHoodie() {
   }
   document.getElementById('hoodie-modal').classList.add('paying');
 }
-
 function copyHoodieIBAN() {
   var iban = document.getElementById('hoodie-iban').textContent;
   var btn = document.getElementById('hoodie-copy-btn');
@@ -1533,18 +1446,14 @@ function copyHoodieIBAN() {
     setTimeout(function () { btn.classList.remove('copied'); btn.textContent = 'IBAN-ის კოპირება'; }, 2500);
   });
 }
-
 document.getElementById('hoodie-overlay').addEventListener('click', function (e) {
   if (e.target === this) closeHoodie();
 });
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeHoodie(); });
 
-/* ---------- ფოტოების მოძრავი ზოლი ----------
-   ფოტოები ჩაიდოს index.html-ის გვერდით და დაერქვას: photo1.jpg, photo2.jpg ... photo10.jpg
-   (გაფართოება შეიძლება იყოს jpg, jpeg, png ან webp). რაც ფაილი არსებობს, ის გამოჩნდება. */
 var GALLERY_MAX = 10;
 var GALLERY_EXTS = ['jpg', 'jpeg', 'png', 'webp'];
-var GALLERY_SPEED = 35;      // სიჩქარე პიქსელი/წამში (მცირე რიცხვი = უფრო ნელა)
+var GALLERY_SPEED = 35;
 var galleryPhotos = [];
 var galleryBuiltW = 0;
 var galleryToken = 0;
@@ -1562,7 +1471,6 @@ function loadGalleryPhoto(i) {
     })();
   });
 }
-
 function initGallery() {
   var jobs = [];
   for (var i = 1; i <= GALLERY_MAX; i++) jobs.push(loadGalleryPhoto(i));
@@ -1571,18 +1479,16 @@ function initGallery() {
     buildGallery();
   });
 }
-
 function buildGallery() {
   if (!galleryPhotos.length) return;
   var sec = document.getElementById('gallery');
   var vp = sec.querySelector('.gallery-viewport');
   var track = document.getElementById('gallery-track');
-  if (document.body.classList.contains('hide-header')) return;   // მთავარი გვერდი დამალულია
+  if (document.body.classList.contains('hide-header')) return;
   sec.hidden = false;
   var W = vp.clientWidth;
   if (!W || W === galleryBuiltW) return;
   var token = ++galleryToken;
-
   track.style.animation = 'none';
   track.textContent = '';
   var first = [];
@@ -1596,7 +1502,6 @@ function buildGallery() {
     track.appendChild(item);
     first.push(item);
   });
-
   var waits = first.map(function (item) {
     var img = item.firstChild;
     return (img.complete && img.naturalWidth) ? Promise.resolve()
@@ -1607,7 +1512,7 @@ function buildGallery() {
     var setW = track.getBoundingClientRect().width;
     if (!setW) return;
     var perHalf = Math.max(1, Math.ceil(W / setW));
-    var totalSets = perHalf * 2;                       // ლუწი რაოდენობა = უწყვეტი მარყუჟი
+    var totalSets = perHalf * 2;
     for (var s = 1; s < totalSets; s++) {
       first.forEach(function (item) {
         var c = item.cloneNode(true);
@@ -1620,13 +1525,11 @@ function buildGallery() {
     galleryBuiltW = W;
   });
 }
-
 var galleryResizeTimer = null;
 window.addEventListener('resize', function () {
   clearTimeout(galleryResizeTimer);
   galleryResizeTimer = setTimeout(buildGallery, 200);
 });
-
 buildMembersForm();
 renderWinners();
 initGallery();
