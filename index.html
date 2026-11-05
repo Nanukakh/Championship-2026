@@ -1190,7 +1190,6 @@ var lastSig = null;
 
 function allTeams() {
   var seen = {}, out = [];
-  // ვაერთიანებთ როგორც სერვერულ, ისე ლოკალურად დამატებულ გუნდებს, რომ არასდროს წაიშალოს
   serverTeams.concat(localTeams).forEach(function (n) {
     var k = n.toLowerCase();
     if (!seen[k]) { seen[k] = true; out.push(n); }
@@ -1244,8 +1243,6 @@ function fetchTeams() {
         return String(t).trim(); 
       }).filter(Boolean);
       
-      // როცა სერვერმა წარმატებით წამოიღო მონაცემები, ლოკალური მასივიდანაც 
-      // შეგვიძლია გავასუფთავოთ უკვე სერვერზე არსებული გუნდები
       localTeams = localTeams.filter(function(locTeam) {
         return !serverTeams.some(function(srvTeam) {
           return srvTeam.toLowerCase() === locTeam.toLowerCase();
@@ -1345,7 +1342,7 @@ function submitReg() {
   fetch(SHEETS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
   .then(function() {
     showSuccess(name, capF, capL, phone, members);
-    addLocalTeam(name); // დაუყოვნებლივ ვამატებთ ლოკალურად რომ არ გაქრეს
+    addLocalTeam(name);
     setTimeout(fetchTeams, 3000);
     setTimeout(fetchTeams, 7000);
   })
