@@ -49,7 +49,6 @@
   }
   .page-frame::before { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
   .page-frame::after  { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
-  /* ---------- მცურავი ღილაკი (პატარა + გადასატანი) ---------- */
   .floating-hoodie-btn {
     position: fixed;
     left: 20px;
@@ -96,7 +95,6 @@
   @media (max-width: 600px) {
     .floating-hoodie-btn { width: 110px; height: 110px; font-size: 0.95rem; padding: 10px; left: 10px; top: calc(50% - 55px); }
   }
-  /* ---------- ზედა ნავიგაცია ---------- */
   .top-nav {
     position: sticky;
     top: 0;
@@ -1192,12 +1190,14 @@ var lastSig = null;
 
 function allTeams() {
   var seen = {}, out = [];
+  // ვაერთიანებთ როგორც სერვერულ, ისე ლოკალურად დამატებულ გუნდებს, რომ არასდროს წაიშალოს
   serverTeams.concat(localTeams).forEach(function (n) {
     var k = n.toLowerCase();
     if (!seen[k]) { seen[k] = true; out.push(n); }
   });
   return out;
 }
+
 function renderTeams() {
   var list = allTeams();
   var sig = teamsStatus + '|' + list.join('\u0001');
@@ -1221,7 +1221,6 @@ function renderTeams() {
   }
 }
 
-/* განახლებული fetchTeams ფუნქცია, რომელიც აგვარებს მონაცემთა წამოღების და ფორმატის პრობლემებს */
 function fetchTeams() {
   return fetch(TEAMS_URL + '?action=teams&t=' + Date.now(), {
     method: 'GET',
@@ -1245,6 +1244,14 @@ function fetchTeams() {
         return String(t).trim(); 
       }).filter(Boolean);
       
+      // როცა სერვერმა წარმატებით წამოიღო მონაცემები, ლოკალური მასივიდანაც 
+      // შეგვიძლია გავასუფთავოთ უკვე სერვერზე არსებული გუნდები
+      localTeams = localTeams.filter(function(locTeam) {
+        return !serverTeams.some(function(srvTeam) {
+          return srvTeam.toLowerCase() === locTeam.toLowerCase();
+        });
+      });
+
       teamsStatus = 'ok';
       renderTeams();
     })
@@ -1256,9 +1263,13 @@ function fetchTeams() {
 }
 
 function addLocalTeam(name) {
-  localTeams.push(name);
-  renderTeams();
+  if (!localTeams.some(function(t) { return t.toLowerCase() === name.toLowerCase(); }) &&
+      !serverTeams.some(function(t) { return t.toLowerCase() === name.toLowerCase(); })) {
+    localTeams.push(name);
+    renderTeams();
+  }
 }
+
 function buildMembersForm() {
   var container = document.getElementById('members-container');
   container.innerHTML = '';
@@ -1334,9 +1345,9 @@ function submitReg() {
   fetch(SHEETS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
   .then(function() {
     showSuccess(name, capF, capL, phone, members);
-    addLocalTeam(name);
-    setTimeout(fetchTeams, 2500);
-    setTimeout(fetchTeams, 8000);
+    addLocalTeam(name); // დაუყოვნებლივ ვამატებთ ლოკალურად რომ არ გაქრეს
+    setTimeout(fetchTeams, 3000);
+    setTimeout(fetchTeams, 7000);
   })
   .catch(function() {
     submitBtn.disabled = false;
