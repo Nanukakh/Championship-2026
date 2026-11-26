@@ -295,8 +295,6 @@
     .about-panel { grid-template-columns: 1fr; }
     .about-item + .about-item { border-left: none; border-top: 1px solid rgba(26,92,42,0.12); }
   }
-
-  /* მოძრავი ფოტოების ბარი */
   #gallery {
     padding: 28px 20px 0;
   }
@@ -365,8 +363,6 @@
     .gallery-track { animation: none; }
     .gallery-viewport { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
   }
-
-  /* მთავარი გვერდი: სეზონის ჩემპიონის ფოტო-ბლოკი */
   .champion-showcase {
     max-width: 920px;
     margin: 34px auto 0;
@@ -422,8 +418,6 @@
     font-weight: 700;
     color: var(--green);
   }
-
-  /* საქველმოქმედო ბანერი "მოაზროვნეებისთვის" გვერდზე */
   .charity-banner {
     background: linear-gradient(135deg, rgba(26,92,42,0.06) 0%, rgba(212,160,23,0.12) 100%);
     border: 1px solid rgba(26,92,42,0.2);
@@ -469,8 +463,6 @@
   .charity-partner-link:hover {
     color: var(--green-mid);
   }
-
-  /* სტატისტიკის გრაფა: 2026 წლის ზამთრის სერიის ჩემპიონები */
   .series-champions-box {
     background: var(--off-white);
     border: 1.5px solid rgba(26,92,42,0.2);
@@ -537,7 +529,6 @@
     padding: 5px 16px;
     border-radius: 20px;
   }
-
   .cta-wrap { display: flex; justify-content: center; }
   .cta-btn {
     display: inline-flex;
@@ -813,13 +804,6 @@
   <section id="gallery" aria-label="ფოტოგალერეა">
     <div class="gallery-viewport">
       <div class="gallery-track" id="gallery-track"></div>
-      <img src="photo1.JPG",
-        src="photo2.JPG",
-        src="photo3.JPG",
-        src="photo4.JPG",
-        src="photo5.JPG"
-        >
-
     </div>
   </section>
 
@@ -879,7 +863,7 @@
             <h3 class="series-champions-title">2026 წლის ზამთრის სერიის ჩემპიონები</h3>
             <div class="series-champions-grid">
               <div class="series-champ-card">
-                <div class="IMG_0752.JPG">
+                <div class="series-champ-photo">
                   <img src="winter_manzambi.jpg" alt="გუნდი მანზამბი" onerror="if(this.src.indexOf('.png')===-1){this.src='winter_manzambi.png';}">
                 </div>
                 <div class="series-champ-trophy">🏆</div>
@@ -887,7 +871,7 @@
                 <div class="series-champ-count">3 გზის ჩემპიონი</div>
               </div>
               <div class="series-champ-card">
-                <div class="IMG_0752.JPG">
+                <div class="series-champ-photo">
                   <img src="winter_among_macs.jpg" alt="გუნდი among macs" onerror="if(this.src.indexOf('.png')===-1){this.src='winter_among_macs.png';}">
                 </div>
                 <div class="series-champ-trophy">🏆</div>
@@ -991,7 +975,7 @@
                 </div>
                 <div class="reg-nav">
                   <span></span>
-                  <button class="btn-reg btn-next" type="button">შემდეგი</button>
+                  <button class="btn-reg btn-next" type="button" onclick="goStep(2)">შემდეგი</button>
                 </div>
               </div>
             </div>
@@ -1022,12 +1006,11 @@
 
 <script>
   const GALLERY_IMAGES = [
-    'gallery1.jpg',
-    'gallery2.jpg',
-    'gallery3.jpg',
-    'gallery4.jpg',
-    'gallery5.jpg',
-    'gallery6.jpg'
+    'photo1.JPG',
+    'photo2.JPG',
+    'photo3.JPG',
+    'photo4.JPG',
+    'photo5.JPG'
   ];
 
   function renderGallery() {
@@ -1078,22 +1061,22 @@
     const gallerySection = document.getElementById('gallery');
 
     if (hash === '#stats') {
-      views.stats.hidden = false;
+      if (views.stats) views.stats.hidden = false;
       document.body.classList.add('hide-header', 'hide-sidebar');
       if (champShowcase) champShowcase.hidden = true;
       if (gallerySection) gallerySection.hidden = true;
     } else if (hash === '#hoodie') {
-      views.hoodie.hidden = false;
+      if (views.hoodie) views.hoodie.hidden = false;
       document.body.classList.add('hide-header', 'hide-sidebar', 'wide-main');
       if (champShowcase) champShowcase.hidden = true;
       if (gallerySection) gallerySection.hidden = true;
     } else if (hash === '#register') {
-      views.register.hidden = false;
+      if (views.register) views.register.hidden = false;
       document.body.classList.add('hide-header');
       if (champShowcase) champShowcase.hidden = true;
       if (gallerySection) gallerySection.hidden = true;
     } else {
-      views.home.hidden = false;
+      if (views.home) views.home.hidden = false;
       if (champShowcase) champShowcase.hidden = false;
       if (gallerySection) gallerySection.hidden = false;
       if (hash === '#about') {
@@ -1101,6 +1084,21 @@
         if (aboutEl) aboutEl.scrollIntoView({ behavior: 'smooth' });
       }
     }
+  }
+
+  function goStep(stepNum) {
+    const steps = document.querySelectorAll('.reg-step');
+    const inds = document.querySelectorAll('.reg-step-indicator');
+    steps.forEach((el, i) => el.classList.toggle('active', i + 1 === stepNum));
+    inds.forEach((el, i) => {
+      el.classList.toggle('active', i + 1 === stepNum);
+      el.classList.toggle('done', i + 1 < stepNum);
+    });
+  }
+
+  function openProductModal(productName) {
+    window.location.hash = '#hoodie';
+    console.log('Selected product:', productName);
   }
 
   window.addEventListener('hashchange', switchView);
