@@ -4,358 +4,120 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>კამპუსის ინტელექტუალური ჩემპიონატი 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Fira+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700&family=Noto+Serif+Georgian:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --green: #1a5c2a;
-    --green-mid: #2a7a3a;
-    --gold: #d4a017;
-    --gold-light: #f0c040;
-    --white: #ffffff;
-    --off-white: #fafaf7;
-    --text-dark: #1a1a1a;
-    --text-mid: #3a3a3a;
-    --text-light: #6a6a6a;
+    --green: #1a5c2a; --green-mid: #2a7a3a; --gold: #d4a017; --gold-light: #f0c040;
+    --white: #ffffff; --off-white: #fafaf7; --text-dark: #1a1a1a; --text-mid: #3a3a3a; --text-light: #6a6a6a;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { font-size: 16px; scroll-behavior: smooth; }
-  body {
-    background: var(--off-white);
-    font-family: 'Fira Sans', sans-serif;
-    color: var(--text-dark);
-    min-height: 100vh;
-    padding: 12px;
-  }
+  body { background: var(--off-white); font-family: 'Noto Sans Georgian', sans-serif; color: var(--text-dark); min-height: 100vh; padding: 12px; }
   .page-frame {
-    min-height: calc(100vh - 24px);
-    border: 4px solid var(--green);
-    outline: 4px solid var(--gold);
-    outline-offset: -10px;
-    background: var(--white);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    overflow: clip;
-    position: relative;
+    min-height: calc(100vh - 24px); border: 4px solid var(--green); outline: 4px solid var(--gold); outline-offset: -10px;
+    background: var(--white); display: flex; flex-direction: column; overflow: clip; position: relative;
   }
-  .page-frame::before,
-  .page-frame::after {
-    content: '';
-    position: absolute;
-    width: 40px; height: 40px;
-    border-color: var(--gold);
-    border-style: solid;
-    z-index: 10;
-  }
+  .page-frame::before, .page-frame::after { content: ''; position: absolute; width: 40px; height: 40px; border-color: var(--gold); border-style: solid; z-index: 10; pointer-events: none; }
   .page-frame::before { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
   .page-frame::after  { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
   .floating-hoodie-btn {
-    position: fixed;
-    left: 20px;
-    top: calc(50% - 70px);
-    z-index: 99;
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    background: var(--white);
-    color: #000000;
-    border: 4px solid var(--green);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-family: 'Fira Sans', sans-serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    text-decoration: none;
-    line-height: 1.25;
-    padding: 14px;
-    cursor: grab;
-    touch-action: none;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-user-drag: none;
-    -webkit-touch-callout: none;
-    transition: box-shadow 0.25s;
-    animation: pulseFloat 3s ease-in-out infinite;
+    position: fixed; left: 20px; top: calc(50% - 70px); z-index: 99; width: 140px; height: 140px; border-radius: 50%;
+    background: var(--white); color: #000; border: 4px solid var(--green); box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-family: 'Noto Sans Georgian', sans-serif; font-size: 1.15rem; font-weight: 700; text-decoration: none; line-height: 1.25;
+    padding: 14px; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-user-drag: none;
+    -webkit-touch-callout: none; transition: box-shadow 0.25s; animation: pulseFloat 3s ease-in-out infinite;
   }
-  .floating-hoodie-btn:hover {
-    box-shadow: 0 12px 35px rgba(0,0,0,0.4);
-  }
-  .floating-hoodie-btn.dragging {
-    cursor: grabbing;
-    animation: none;
-    box-shadow: 0 16px 40px rgba(0,0,0,0.45);
-  }
-  @keyframes pulseFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
+  .floating-hoodie-btn:hover { box-shadow: 0 12px 35px rgba(0,0,0,0.4); }
+  .floating-hoodie-btn.dragging { cursor: grabbing; animation: none; box-shadow: 0 16px 40px rgba(0,0,0,0.45); }
+  @keyframes pulseFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
   @media (max-width: 600px) {
     .floating-hoodie-btn { width: 110px; height: 110px; font-size: 0.95rem; padding: 10px; left: 10px; top: calc(50% - 55px); }
   }
   .top-nav {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 4px 28px;
-    padding: 10px 20px;
-    background: var(--green);
-    border-bottom: 1px solid rgba(255,255,255,0.12);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    position: sticky; top: 0; z-index: 20; display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 28px;
+    padding: 10px 20px; background: var(--green); border-bottom: 1px solid rgba(255,255,255,0.12); box-shadow: 0 2px 10px rgba(0,0,0,0.15);
   }
   .top-nav a {
-    color: rgba(255,255,255,0.85);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    padding: 6px 2px;
-    border-bottom: 2px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
+    color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em;
+    padding: 6px 2px; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s;
   }
-  .top-nav a:hover,
-  .top-nav a:focus-visible {
-    color: var(--gold-light);
-    border-bottom-color: var(--gold);
-    outline: none;
-  }
+  .top-nav a:hover, .top-nav a:focus-visible { color: var(--gold-light); border-bottom-color: var(--gold); outline: none; }
   #about { scroll-margin-top: 70px; }
-  header {
-    background: var(--green);
-    padding: 14px 40px 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-  }
-  body.hide-header header,
-  header[hidden] {
-    display: none !important;
-  }
+  header { background: var(--green); padding: 14px 40px 12px; display: flex; flex-direction: column; align-items: center; position: relative; }
+  body.hide-header header, header[hidden] { display: none !important; }
   header::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 6px;
+    content: ''; display: block; width: 100%; height: 6px;
     background: linear-gradient(90deg, var(--green) 0%, var(--gold) 30%, var(--gold-light) 50%, var(--gold) 70%, var(--green) 100%);
   }
-  .header-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-    max-width: 900px;
-  }
-  .hero-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding-bottom: 4px;
-    text-decoration: none;
-    color: inherit;
-  }
+  .header-inner { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; max-width: 900px; }
+  .hero-section { display: flex; flex-direction: column; align-items: center; gap: 8px; padding-bottom: 4px; text-decoration: none; color: inherit; }
   .owl-ring {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    overflow: hidden;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: float 4s ease-in-out infinite;
-    flex-shrink: 0;
+    width: 130px; height: 130px; border-radius: 50%; overflow: hidden; background: transparent; display: flex;
+    align-items: center; justify-content: center; animation: float 4s ease-in-out infinite; flex-shrink: 0;
     filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
   }
-  .owl-ring img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-    border-radius: 50%;
-    display: block;
-  }
+  .owl-ring img { width: 100%; height: 100%; object-fit: cover; object-position: center center; border-radius: 50%; display: block; }
   .owl-ring.no-logo::before { content: '\1F989'; font-size: 5rem; }
-  @keyframes float {
-    0%,100% { transform: translateY(0); }
-    50%      { transform: translateY(-6px); }
-  }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
   .event-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.3rem, 4vw, 2.1rem);
-    font-weight: 700;
-    color: var(--white);
-    text-align: center;
-    letter-spacing: 0.03em;
-    line-height: 1.2;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    font-family: 'Noto Serif Georgian', serif; font-size: clamp(1.3rem, 4vw, 2.1rem); font-weight: 700; color: var(--white);
+    text-align: center; letter-spacing: 0.03em; line-height: 1.3; text-shadow: 0 2px 12px rgba(0,0,0,0.3);
   }
   .year-badge {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    color: var(--green);
-    font-family: 'Fira Sans', sans-serif;
-    font-weight: 700;
-    font-size: 0.85rem;
-    letter-spacing: 0.12em;
-    padding: 4px 16px;
-    border-radius: 20px;
-    margin-top: -4px;
+    display: inline-block; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--green);
+    font-family: 'Noto Sans Georgian', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.12em;
+    padding: 4px 16px; border-radius: 20px; margin-top: -4px;
   }
   .layout {
-    flex: 1;
-    width: 100%;
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 0 32px;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 270px;
-    gap: 36px;
-    align-items: start;
+    flex: 1; width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 32px; display: grid;
+    grid-template-columns: minmax(0, 1fr) 270px; gap: 36px; align-items: start;
   }
   @media (min-width: 1240px) {
-    .layout {
-      max-width: none;
-      padding: 0 40px;
-      grid-template-columns: 270px minmax(0, 820px) 270px;
-      justify-content: space-between;
-      gap: 0;
-    }
+    .layout { max-width: none; padding: 0 40px; grid-template-columns: 270px minmax(0, 820px) 270px; justify-content: space-between; gap: 0; }
     main { grid-column: 2; grid-row: 1; }
     .teams-panel { grid-column: 3; grid-row: 1; }
   }
-  body.hide-sidebar .layout {
-    display: flex !important;
-    justify-content: center !important;
-  }
-  body.hide-sidebar main {
-    grid-column: auto !important;
-    width: 100% !important;
-    max-width: 860px !important;
-    margin: 0 auto !important;
-  }
-  body.hide-sidebar.wide-main main {
-    max-width: 1040px !important;
-  }
-  body.hide-sidebar .teams-panel {
-    display: none !important;
-  }
-  main {
-    min-width: 0;
-    padding: 48px 0 56px;
-  }
-  .view {
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
-  }
+  body.hide-sidebar .layout { display: flex !important; justify-content: center !important; }
+  body.hide-sidebar main { grid-column: auto !important; width: 100% !important; max-width: 860px !important; margin: 0 auto !important; }
+  body.hide-sidebar.wide-main main { max-width: 1040px !important; }
+  body.hide-sidebar .teams-panel { display: none !important; }
+  main { min-width: 0; padding: 48px 0 56px; }
+  .view { display: flex; flex-direction: column; gap: 48px; }
   .view[hidden] { display: none; }
-  .section-label {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 24px;
-  }
+  .section-label { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
   .section-label .line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); }
   .section-label .line.rev { background: linear-gradient(270deg, var(--gold), transparent); }
-  .section-label h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.35rem;
-    font-weight: 600;
-    color: var(--green);
-    letter-spacing: 0.04em;
-    text-align: center;
-  }
+  .section-label h2 { font-family: 'Noto Serif Georgian', serif; font-size: 1.35rem; font-weight: 600; color: var(--green); letter-spacing: 0.04em; text-align: center; }
   .about-panel {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border: 1px solid rgba(26,92,42,0.15);
-    border-top: 3px solid var(--gold);
-    background: var(--off-white);
-    border-radius: 6px;
-    box-shadow: 0 6px 20px rgba(26,92,42,0.06);
+    display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid rgba(26,92,42,0.15); border-top: 3px solid var(--gold);
+    background: var(--off-white); border-radius: 6px; box-shadow: 0 6px 20px rgba(26,92,42,0.06);
   }
-  .about-item {
-    padding: 32px 28px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  .about-item { padding: 32px 28px; text-align: center; display: flex; align-items: center; justify-content: center; }
   .about-item + .about-item { border-left: 1px solid rgba(26,92,42,0.12); }
   .about-item p { font-size: 0.95rem; color: var(--text-mid); line-height: 1.7; }
   @media (max-width: 720px) {
     .about-panel { grid-template-columns: 1fr; }
     .about-item + .about-item { border-left: none; border-top: 1px solid rgba(26,92,42,0.12); }
   }
-  #gallery {
-    padding: 28px 20px 0;
-  }
-  #gallery[hidden],
-  body.hide-header #gallery {
-    display: none !important;
-  }
+  #gallery { padding: 28px 20px 0; }
+  #gallery[hidden], body.hide-header #gallery { display: none !important; }
   .gallery-viewport {
-    overflow: hidden;
-    padding: 8px 0;
+    overflow: hidden; padding: 8px 0;
     -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
             mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
   }
-  .gallery-track {
-    display: flex;
-    width: max-content;
-    animation: galleryScroll 60s linear infinite;
-    will-change: transform;
-  }
-  .gallery-track:hover {
-    animation-play-state: paused;
-  }
-  .gallery-item {
-    flex: 0 0 auto;
-    margin-right: 24px;
-    line-height: 0;
-    border: 3px solid var(--gold);
-    border-radius: 4px;
-    overflow: hidden;
-    background: var(--off-white);
-  }
-  .gallery-item img {
-    display: block;
-    height: 280px;
-    width: auto;
-    user-select: none;
-    -webkit-user-drag: none;
-  }
+  .gallery-track { display: flex; width: max-content; animation: galleryScroll 60s linear infinite; will-change: transform; }
+  .gallery-track:hover { animation-play-state: paused; }
+  .gallery-item { flex: 0 0 auto; margin-right: 24px; line-height: 0; border: 3px solid var(--gold); border-radius: 4px; overflow: hidden; background: var(--off-white); }
+  .gallery-item img { display: block; height: 280px; width: auto; user-select: none; -webkit-user-drag: none; }
   .gallery-fallback {
-    height: 280px;
-    width: 380px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    line-height: 1.4;
-    background: linear-gradient(135deg, rgba(26,92,42,0.08), rgba(212,160,23,0.14));
-    color: var(--green);
-    font-weight: 600;
-    font-size: 0.95rem;
-    padding: 16px;
-    text-align: center;
+    height: 280px; width: 380px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; line-height: 1.4;
+    background: linear-gradient(135deg, rgba(26,92,42,0.08), rgba(212,160,23,0.14)); color: var(--green); font-weight: 600; font-size: 0.95rem; padding: 16px; text-align: center;
   }
-  @keyframes galleryScroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
+  @keyframes galleryScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @media (max-width: 600px) {
-    .gallery-item img,
-    .gallery-fallback { height: 200px; }
+    .gallery-item img, .gallery-fallback { height: 200px; }
     .gallery-fallback { width: 270px; }
     .gallery-item { margin-right: 18px; }
   }
@@ -363,416 +125,87 @@
     .gallery-track { animation: none; }
     .gallery-viewport { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
   }
-  .champion-showcase {
-    max-width: 920px;
-    margin: 34px auto 0;
-    padding: 0 24px;
-    text-align: center;
-  }
-  .champion-showcase[hidden],
-  body.hide-header .champion-showcase {
-    display: none !important;
-  }
-  .champion-frame {
-    background: var(--off-white);
-    border: 2px solid var(--gold);
-    border-top: 5px solid var(--green);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 12px 34px rgba(26, 92, 42, 0.14);
-  }
-  .champion-photo-wrap {
-    width: 100%;
-    border: 3px solid var(--gold);
-    border-radius: 6px;
-    overflow: hidden;
-    background: #eef3ef;
-    line-height: 0;
-  }
-  .champion-photo-wrap img {
-    display: block;
-    width: 100%;
-    max-height: 540px;
-    object-fit: cover;
-  }
-  .champion-caption {
-    margin-top: 18px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-  .champion-badge {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    color: var(--green);
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    padding: 5px 18px;
-    border-radius: 20px;
-  }
-  .champion-team-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.45rem, 3.2vw, 2rem);
-    font-weight: 700;
-    color: var(--green);
-  }
+  .champion-showcase { max-width: 920px; margin: 34px auto 0; padding: 0 24px; text-align: center; }
+  .champion-showcase[hidden], body.hide-header .champion-showcase { display: none !important; }
+  .champion-frame { background: var(--off-white); border: 2px solid var(--gold); border-top: 5px solid var(--green); border-radius: 10px; padding: 20px; box-shadow: 0 12px 34px rgba(26,92,42,0.14); }
+  .champion-photo-wrap { width: 100%; border: 3px solid var(--gold); border-radius: 6px; overflow: hidden; background: #eef3ef; line-height: 0; }
+  .champion-photo-wrap img { display: block; width: 100%; max-height: 540px; object-fit: cover; }
+  .champion-caption { margin-top: 18px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .champion-badge { display: inline-block; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--green); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; padding: 5px 18px; border-radius: 20px; }
+  .champion-team-title { font-family: 'Noto Serif Georgian', serif; font-size: clamp(1.45rem, 3.2vw, 2rem); font-weight: 700; color: var(--green); }
   .charity-banner {
-    background: linear-gradient(135deg, rgba(26,92,42,0.06) 0%, rgba(212,160,23,0.12) 100%);
-    border: 1px solid rgba(26,92,42,0.2);
-    border-left: 5px solid var(--gold);
-    border-radius: 8px;
-    padding: 24px 28px;
-    margin-bottom: 30px;
-    text-align: center;
-    box-shadow: 0 6px 20px rgba(26,92,42,0.05);
+    background: linear-gradient(135deg, rgba(26,92,42,0.06) 0%, rgba(212,160,23,0.12) 100%); border: 1px solid rgba(26,92,42,0.2);
+    border-left: 5px solid var(--gold); border-radius: 8px; padding: 24px 28px; margin-bottom: 30px; text-align: center; box-shadow: 0 6px 20px rgba(26,92,42,0.05);
   }
-  .charity-banner-tag {
-    display: inline-block;
-    background: var(--green);
-    color: var(--gold-light);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    padding: 4px 14px;
-    border-radius: 20px;
-    margin-bottom: 12px;
-  }
-  .charity-banner p {
-    font-size: 1rem;
-    line-height: 1.75;
-    color: var(--text-dark);
-    max-width: 780px;
-    margin: 0 auto;
-  }
-  .charity-banner strong {
-    color: var(--green);
-    font-weight: 600;
-  }
-  .charity-partner-link {
-    display: inline-block;
-    margin-top: 10px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--green);
-    text-decoration: none;
-    border-bottom: 1.5px solid var(--gold);
-    padding-bottom: 2px;
-  }
-  .charity-partner-link:hover {
-    color: var(--green-mid);
-  }
-  .series-champions-box {
-    background: var(--off-white);
-    border: 1.5px solid rgba(26,92,42,0.2);
-    border-top: 4px solid var(--green);
-    border-radius: 8px;
-    padding: 28px 24px;
-    margin-bottom: 28px;
-    box-shadow: 0 8px 24px rgba(26,92,42,0.07);
-  }
-  .series-champions-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.55rem;
-    font-weight: 700;
-    color: var(--green);
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  .series-champions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-  }
-  .series-champ-card {
-    background: var(--white);
-    border: 1px solid rgba(26,92,42,0.16);
-    border-top: 4px solid var(--gold);
-    border-radius: 6px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
-  }
-  .series-champ-photo {
-    width: 100%;
-    height: 190px;
-    border: 2px solid var(--gold);
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 14px;
-    background: var(--off-white);
-  }
-  .series-champ-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .series-champ-trophy {
-    font-size: 2rem;
-    margin-bottom: 6px;
-  }
-  .series-champ-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.45rem;
-    font-weight: 700;
-    color: var(--green);
-    margin-bottom: 8px;
-  }
-  .series-champ-count {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    color: var(--green);
-    font-weight: 700;
-    font-size: 0.88rem;
-    padding: 5px 16px;
-    border-radius: 20px;
-  }
+  .charity-banner-tag { display: inline-block; background: var(--green); color: var(--gold-light); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; padding: 4px 14px; border-radius: 20px; margin-bottom: 12px; }
+  .charity-banner p { font-size: 1rem; line-height: 1.75; color: var(--text-dark); max-width: 780px; margin: 0 auto; }
+  .charity-banner strong { color: var(--green); font-weight: 600; }
+  .charity-partner-link { display: inline-block; margin-top: 10px; font-size: 0.9rem; font-weight: 600; color: var(--green); text-decoration: none; border-bottom: 1.5px solid var(--gold); padding-bottom: 2px; }
+  .charity-partner-link:hover { color: var(--green-mid); }
+  .series-champions-box { background: var(--off-white); border: 1.5px solid rgba(26,92,42,0.2); border-top: 4px solid var(--green); border-radius: 8px; padding: 28px 24px; margin-bottom: 28px; box-shadow: 0 8px 24px rgba(26,92,42,0.07); }
+  .series-champions-title { font-family: 'Noto Serif Georgian', serif; font-size: 1.55rem; font-weight: 700; color: var(--green); text-align: center; margin-bottom: 20px; }
+  .series-champions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+  .series-champ-card { background: var(--white); border: 1px solid rgba(26,92,42,0.16); border-top: 4px solid var(--gold); border-radius: 6px; padding: 20px; text-align: center; box-shadow: 0 4px 14px rgba(0,0,0,0.04); }
+  .series-champ-photo { width: 100%; height: 190px; border: 2px solid var(--gold); border-radius: 6px; overflow: hidden; margin-bottom: 14px; background: var(--off-white); }
+  .series-champ-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .series-champ-trophy { font-size: 2rem; margin-bottom: 6px; }
+  .series-champ-name { font-family: 'Noto Serif Georgian', serif; font-size: 1.45rem; font-weight: 700; color: var(--green); margin-bottom: 8px; }
+  .series-champ-count { display: inline-block; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--green); font-weight: 700; font-size: 0.88rem; padding: 5px 16px; border-radius: 20px; }
   .cta-wrap { display: flex; justify-content: center; }
   .cta-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: min(100%, 360px);
-    padding: 24px 56px;
-    font-family: 'Fira Sans', sans-serif;
-    font-weight: 600;
-    font-size: 1.35rem;
-    letter-spacing: 0.05em;
-    color: var(--green);
-    text-decoration: none;
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(212,160,23,0.35), inset 0 -3px 0 rgba(26,92,42,0.18);
-    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-flex; align-items: center; justify-content: center; min-width: min(100%, 360px); padding: 24px 56px;
+    font-family: 'Noto Sans Georgian', sans-serif; font-weight: 600; font-size: 1.35rem; letter-spacing: 0.05em; color: var(--green); text-decoration: none;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(212,160,23,0.35), inset 0 -3px 0 rgba(26,92,42,0.18); transition: transform 0.2s, box-shadow 0.2s;
   }
-  .cta-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 32px rgba(212,160,23,0.45), inset 0 -3px 0 rgba(26,92,42,0.18);
-  }
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    align-self: flex-start;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--green);
-    text-decoration: none;
-    margin-bottom: -16px;
-  }
+  .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(212,160,23,0.45), inset 0 -3px 0 rgba(26,92,42,0.18); }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; font-size: 0.85rem; font-weight: 500; color: var(--green); text-decoration: none; margin-bottom: -16px; }
   .back-link:hover { text-decoration: underline; }
-  .merch-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 26px;
-    max-width: 1040px;
-    margin: 0 auto;
-  }
-  @media (max-width: 768px) {
-    .merch-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 500px) {
-    .merch-grid { grid-template-columns: 1fr; }
-  }
-  .merch-card {
-    background: var(--white);
-    border: 1px solid rgba(26,92,42,0.15);
-    border-top: 3px solid var(--gold);
-    border-radius: 6px;
-    padding: 22px 20px;
-    text-align: center;
-    box-shadow: 0 6px 20px rgba(26,92,42,0.08);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  .merch-photo {
-    display: block;
-    width: 100%;
-    border: 3px solid var(--gold);
-    border-radius: 4px;
-    overflow: hidden;
-    line-height: 0;
-    margin-bottom: 20px;
-  }
-  .merch-photo img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-  .merch-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--green);
-    margin-bottom: 6px;
-  }
-  .merch-price {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--gold);
-    margin-bottom: 16px;
-  }
+  .merch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; max-width: 1040px; margin: 0 auto; }
+  @media (max-width: 768px) { .merch-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .merch-grid { grid-template-columns: 1fr; } }
+  .merch-card { background: var(--white); border: 1px solid rgba(26,92,42,0.15); border-top: 3px solid var(--gold); border-radius: 6px; padding: 22px 20px; text-align: center; box-shadow: 0 6px 20px rgba(26,92,42,0.08); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+  .merch-photo { display: block; width: 100%; border: 3px solid var(--gold); border-radius: 4px; overflow: hidden; line-height: 0; margin-bottom: 20px; }
+  .merch-photo img { display: block; width: 100%; height: auto; }
+  .merch-card h3 { font-family: 'Noto Serif Georgian', serif; font-size: 1.5rem; font-weight: 700; color: var(--green); margin-bottom: 6px; }
+  .merch-price { font-size: 1.25rem; font-weight: 700; color: var(--gold); margin-bottom: 16px; }
   .merch-card .btn-reg { margin-top: auto; padding: 12px 34px; }
-  footer {
-    text-align: center;
-    padding: 20px 32px;
-    border-top: 1px solid rgba(26,92,42,0.12);
-    font-size: 0.78rem;
-    color: var(--text-light);
-    background: var(--off-white);
-  }
+  footer { text-align: center; padding: 20px 32px; border-top: 1px solid rgba(26,92,42,0.12); font-size: 0.78rem; color: var(--text-light); background: var(--off-white); }
   footer span { color: var(--green); font-weight: 500; }
-  .reg-form-wrap {
-    background: var(--off-white);
-    border: 1px solid rgba(26,92,42,0.15);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .reg-progress {
-    display: flex;
-    background: var(--green);
-    padding: 0;
-  }
-  .reg-step-indicator {
-    flex: 1;
-    text-align: center;
-    padding: 12px 8px;
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 0.06em;
-    border-right: 1px solid rgba(255,255,255,0.1);
-    transition: all 0.3s;
-  }
+  .reg-form-wrap { background: var(--off-white); border: 1px solid rgba(26,92,42,0.15); border-radius: 8px; overflow: hidden; }
+  .reg-progress { display: flex; background: var(--green); padding: 0; }
+  .reg-step-indicator { flex: 1; text-align: center; padding: 12px 8px; font-size: 0.72rem; font-weight: 500; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; border-right: 1px solid rgba(255,255,255,0.1); transition: all 0.3s; }
   .reg-step-indicator:last-child { border-right: none; }
   .reg-step-indicator.active { color: var(--gold-light); font-weight: 600; }
   .reg-step-indicator.done { color: rgba(255,255,255,0.75); }
-  .reg-step-indicator .step-num {
-    display: block;
-    font-size: 1.1rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 700;
-    margin-bottom: 2px;
-  }
+  .reg-step-indicator .step-num { display: block; font-size: 1.1rem; font-family: 'Noto Serif Georgian', serif; font-weight: 700; margin-bottom: 2px; }
   .reg-body { padding: 32px 36px 28px; }
   .reg-step { display: none; }
   .reg-step.active { display: block; }
-  .reg-step-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--green);
-    margin-bottom: 6px;
-  }
+  .reg-step-title { font-family: 'Noto Serif Georgian', serif; font-size: 1.3rem; font-weight: 600; color: var(--green); margin-bottom: 6px; }
   .reg-step-sub { font-size: 0.82rem; color: var(--text-light); margin-bottom: 24px; }
-  .field-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
   .field-row.single { grid-template-columns: 1fr; }
+  @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } .reg-body { padding: 24px 18px; } }
   .field-group { display: flex; flex-direction: column; gap: 5px; }
-  .field-group label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--green);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-  .field-group input {
-    border: 1.5px solid rgba(26,92,42,0.2);
-    border-radius: 4px;
-    padding: 10px 13px;
-    font-family: 'Fira Sans', sans-serif;
-    font-size: 0.88rem;
-    color: var(--text-dark);
-    background: white;
-    outline: none;
-  }
+  .field-group label { font-size: 0.75rem; font-weight: 600; color: var(--green); letter-spacing: 0.06em; text-transform: uppercase; }
+  .field-group input { border: 1.5px solid rgba(26,92,42,0.2); border-radius: 4px; padding: 10px 13px; font-family: 'Noto Sans Georgian', sans-serif; font-size: 0.88rem; color: var(--text-dark); background: white; outline: none; }
   .field-group input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(26,92,42,0.08); }
-  .reg-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(26,92,42,0.1);
-  }
-  .btn-reg {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 11px 26px;
-    font-family: 'Fira Sans', sans-serif;
-    font-weight: 600;
-    font-size: 0.88rem;
-    border-radius: 4px;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s;
-  }
+  .reg-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(26,92,42,0.1); }
+  .btn-reg { display: inline-flex; align-items: center; gap: 8px; padding: 11px 26px; font-family: 'Noto Sans Georgian', sans-serif; font-weight: 600; font-size: 0.88rem; border-radius: 4px; cursor: pointer; border: none; transition: all 0.2s; }
   .btn-next { background: var(--green); color: white; }
   .btn-submit { background: var(--gold); color: var(--green); }
-  .teams-panel {
-    position: sticky;
-    top: 64px;
-    margin: 48px 0 56px;
-    background: var(--white);
-    border: 1px solid rgba(26,92,42,0.15);
-    border-top: 3px solid var(--gold);
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 6px 20px rgba(26,92,42,0.07);
-  }
-  .teams-head {
-    background: var(--green);
-    color: var(--white);
-    padding: 14px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-  }
-  .teams-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-  }
-  .teams-count {
-    min-width: 28px; height: 28px;
-    padding: 0 8px;
-    border-radius: 14px;
-    background: var(--gold);
-    color: var(--green);
-    font-weight: 700;
-    font-size: 0.82rem;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .teams-list {
-    list-style: none;
-    max-height: min(60vh, 460px);
-    overflow-y: auto;
-    padding: 4px 0;
-  }
+  .reg-summary { line-height: 1.9; font-size: 0.95rem; }
+  .teams-panel { position: sticky; top: 64px; margin: 48px 0 56px; background: var(--white); border: 1px solid rgba(26,92,42,0.15); border-top: 3px solid var(--gold); border-radius: 6px; overflow: hidden; box-shadow: 0 6px 20px rgba(26,92,42,0.07); }
+  .teams-head { background: var(--green); color: var(--white); padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .teams-title { font-family: 'Noto Serif Georgian', serif; font-size: 1.1rem; font-weight: 600; }
+  .teams-count { min-width: 28px; height: 28px; padding: 0 8px; border-radius: 14px; background: var(--gold); color: var(--green); font-weight: 700; font-size: 0.82rem; display: flex; align-items: center; justify-content: center; }
+  .teams-list { list-style: none; max-height: min(60vh, 460px); overflow-y: auto; padding: 4px 0; }
+  .teams-list li.team-item { padding: 9px 16px; font-size: 0.88rem; border-bottom: 1px solid rgba(26,92,42,0.08); }
   .teams-empty { padding: 22px 16px; text-align: center; font-size: 0.82rem; color: var(--text-light); }
-  .teams-foot {
-    display: flex; align-items: center; justify-content: center;
-    gap: 8px; padding: 10px 16px;
-    font-size: 0.72rem; color: var(--text-light);
-    background: var(--off-white);
-    border-top: 1px solid rgba(26,92,42,0.1);
-  }
+  .teams-foot { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 16px; font-size: 0.72rem; color: var(--text-light); background: var(--off-white); border-top: 1px solid rgba(26,92,42,0.1); }
   .live-dot { width: 8px; height: 8px; border-radius: 50%; background: #2fb25a; animation: livePulse 2s infinite; }
-  @keyframes livePulse {
-    0% { box-shadow: 0 0 0 0 rgba(47,178,90,0.5); }
-    70% { box-shadow: 0 0 0 7px rgba(47,178,90,0); }
-    100% { box-shadow: 0 0 0 0 rgba(47,178,90,0); }
-  }
+  @keyframes livePulse { 0% { box-shadow: 0 0 0 0 rgba(47,178,90,0.5); } 70% { box-shadow: 0 0 0 7px rgba(47,178,90,0); } 100% { box-shadow: 0 0 0 0 rgba(47,178,90,0); } }
   @media (max-width: 960px) {
     .layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 0 28px; }
     .teams-panel { position: static; margin: 0 0 40px; }
@@ -807,7 +240,7 @@
     </div>
   </section>
 
-  <!-- მთავარი გვერდი: სეზონის ჩემპიონის ფოტო მოძრავი ბარის ქვემოთ -->
+  <!-- სეზონის ჩემპიონი -->
   <section class="champion-showcase" id="champion-showcase" aria-label="სეზონის ჩემპიონი">
     <div class="champion-frame">
       <div class="champion-photo-wrap">
@@ -830,15 +263,9 @@
             <div class="line rev"></div>
           </div>
           <div class="about-panel">
-            <div class="about-item">
-              <p>სტუდენტური გუნდების ინტელექტუალური შეჯიბრება კამპუსის მასშტაბით.</p>
-            </div>
-            <div class="about-item">
-              <p>თითოეული გუნდი წარმოდგენილია კაპიტანის მეშვეობით, რომელიც პასუხისმგებელია რეგისტრაციაზე.</p>
-            </div>
-            <div class="about-item">
-              <p>გამარჯვებული გუნდი მოიპოვებს 2026 წლის ზამთრის სერიის კამპუსის ინტელექტუალური ჩემპიონის ტიტულს.</p>
-            </div>
+            <div class="about-item"><p>სტუდენტური გუნდების ინტელექტუალური შეჯიბრება კამპუსის მასშტაბით.</p></div>
+            <div class="about-item"><p>თითოეული გუნდი წარმოდგენილია კაპიტანის მეშვეობით, რომელიც პასუხისმგებელია რეგისტრაციაზე.</p></div>
+            <div class="about-item"><p>გამარჯვებული გუნდი მოიპოვებს 2026 წლის ზამთრის სერიის კამპუსის ინტელექტუალური ჩემპიონის ტიტულს.</p></div>
           </div>
         </section>
         <section class="cta-wrap" id="signup">
@@ -858,7 +285,6 @@
             <h2>გამარჯვებული გუნდების სტატისტიკა</h2>
             <div class="line rev"></div>
           </div>
-
           <div class="series-champions-box">
             <h3 class="series-champions-title">2026 წლის ზამთრის სერიის ჩემპიონები</h3>
             <div class="series-champions-grid">
@@ -880,7 +306,6 @@
               </div>
             </div>
           </div>
-
           <div id="winners-box"></div>
         </section>
       </div>
@@ -897,7 +322,6 @@
             <h2>საჩუქრები მოაზროვნეებისთვის</h2>
             <div class="line rev"></div>
           </div>
-
           <div class="charity-banner">
             <span class="charity-banner-tag">საქველმოქმედო ინიციატივა</span>
             <p>
@@ -905,7 +329,6 @@
             </p>
             <a class="charity-partner-link" href="https://charte.ge" target="_blank" rel="noopener noreferrer">ჩვენი პარტნიორი: ორგანიზაცია „ჩართე“ (charte.ge) ↗</a>
           </div>
-
           <div class="merch-grid">
             <div class="merch-card">
               <div class="merch-photo"><img src="hoodie.png" alt="შავი ჰუდი" id="hoodie-img-element"></div>
@@ -953,29 +376,52 @@
                 <div class="reg-step-sub">შეიყვანეთ კაპიტნის სახელი, გვარი და გუნდის სახელი</div>
                 <div class="field-row single">
                   <div class="field-group">
-                    <label>გუნდის სახელი *</label>
+                    <label for="team-name">გუნდის სახელი *</label>
                     <input type="text" id="team-name" placeholder="მაგ: ეკლის გუნდი">
                   </div>
                 </div>
                 <div class="field-row">
                   <div class="field-group">
-                    <label>კაპიტნის სახელი *</label>
+                    <label for="cap-first">კაპიტნის სახელი *</label>
                     <input type="text" id="cap-first" placeholder="სახელი">
                   </div>
                   <div class="field-group">
-                    <label>კაპიტნის გვარი *</label>
+                    <label for="cap-last">კაპიტნის გვარი *</label>
                     <input type="text" id="cap-last" placeholder="გვარი">
                   </div>
                 </div>
                 <div class="field-row single">
                   <div class="field-group">
-                    <label>კაპიტნის ტელეფონი *</label>
+                    <label for="cap-phone">კაპიტნის ტელეფონი *</label>
                     <input type="tel" id="cap-phone" placeholder="+995 5XX XXX XXX">
                   </div>
                 </div>
                 <div class="reg-nav">
                   <span></span>
                   <button class="btn-reg btn-next" type="button" onclick="goStep(2)">შემდეგი</button>
+                </div>
+              </div>
+
+              <div class="reg-step" id="step-2">
+                <div class="reg-step-title">მონაწილეები</div>
+                <div class="reg-step-sub">შეიყვანეთ გუნდის დანარჩენი წევრები (მინიმუმ 1)</div>
+                <div class="field-row single"><div class="field-group"><label for="m1">მონაწილე 1 *</label><input type="text" id="m1" class="member" placeholder="სახელი გვარი"></div></div>
+                <div class="field-row single"><div class="field-group"><label for="m2">მონაწილე 2</label><input type="text" id="m2" class="member" placeholder="სახელი გვარი"></div></div>
+                <div class="field-row single"><div class="field-group"><label for="m3">მონაწილე 3</label><input type="text" id="m3" class="member" placeholder="სახელი გვარი"></div></div>
+                <div class="field-row single"><div class="field-group"><label for="m4">მონაწილე 4</label><input type="text" id="m4" class="member" placeholder="სახელი გვარი"></div></div>
+                <div class="reg-nav">
+                  <button class="btn-reg btn-next" type="button" onclick="goStep(1)">უკან</button>
+                  <button class="btn-reg btn-next" type="button" onclick="goStep(3)">შემდეგი</button>
+                </div>
+              </div>
+
+              <div class="reg-step" id="step-3">
+                <div class="reg-step-title">დადასტურება</div>
+                <div class="reg-step-sub">შეამოწმეთ მონაცემები და დაადასტურეთ</div>
+                <div id="reg-summary" class="reg-summary"></div>
+                <div class="reg-nav">
+                  <button class="btn-reg btn-next" type="button" onclick="goStep(2)">უკან</button>
+                  <button class="btn-reg btn-submit" type="button" onclick="submitReg()">გაგზავნა</button>
                 </div>
               </div>
             </div>
@@ -1005,13 +451,8 @@
 </div>
 
 <script>
-  const GALLERY_IMAGES = [
-    'photo1.JPG',
-    'photo2.JPG',
-    'photo3.JPG',
-    'photo4.JPG',
-    'photo5.JPG'
-  ];
+  const GALLERY_IMAGES = ['photo1.JPG', 'photo2.JPG', 'photo3.JPG', 'photo4.JPG', 'photo5.JPG'];
+  const teams = [];
 
   function renderGallery() {
     const track = document.getElementById('gallery-track');
@@ -1084,26 +525,111 @@
         if (aboutEl) aboutEl.scrollIntoView({ behavior: 'smooth' });
       }
     }
+    if (hash !== '#about') window.scrollTo({ top: 0 });
   }
 
-  function goStep(stepNum) {
-    const steps = document.querySelectorAll('.reg-step');
-    const inds = document.querySelectorAll('.reg-step-indicator');
-    steps.forEach((el, i) => el.classList.toggle('active', i + 1 === stepNum));
-    inds.forEach((el, i) => {
-      el.classList.toggle('active', i + 1 === stepNum);
-      el.classList.toggle('done', i + 1 < stepNum);
+  function goStep(n) {
+    if (n >= 2) {
+      const t = document.getElementById('team-name').value.trim();
+      const f = document.getElementById('cap-first').value.trim();
+      const l = document.getElementById('cap-last').value.trim();
+      const p = document.getElementById('cap-phone').value.trim();
+      if (!t || !f || !l || !/^\+?[0-9\s]{9,15}$/.test(p)) {
+        alert('გთხოვთ, სწორად შეავსოთ ყველა სავალდებულო ველი.');
+        return;
+      }
+    }
+    if (n === 3) {
+      const m = [...document.querySelectorAll('.member')].map(i => i.value.trim()).filter(Boolean);
+      if (!m.length) { alert('დაამატეთ მინიმუმ ერთი მონაწილე.'); return; }
+      const s = document.getElementById('reg-summary');
+      s.textContent = '';
+      const rows = [
+        ['გუნდი', document.getElementById('team-name').value.trim()],
+        ['კაპიტანი', document.getElementById('cap-first').value.trim() + ' ' + document.getElementById('cap-last').value.trim()],
+        ['ტელეფონი', document.getElementById('cap-phone').value.trim()],
+        ['მონაწილეები', m.join(', ')]
+      ];
+      rows.forEach(([k, v]) => {
+        const d = document.createElement('div');
+        const b = document.createElement('strong');
+        b.textContent = k + ': ';
+        d.append(b, v);
+        s.appendChild(d);
+      });
+    }
+    document.querySelectorAll('.reg-step').forEach((el, i) => el.classList.toggle('active', i + 1 === n));
+    document.querySelectorAll('.reg-step-indicator').forEach((el, i) => {
+      el.classList.toggle('active', i + 1 === n);
+      el.classList.toggle('done', i + 1 < n);
     });
   }
 
+  function renderTeams() {
+    const ul = document.getElementById('teams-list');
+    document.getElementById('teams-count').textContent = teams.length;
+    ul.textContent = '';
+    if (!teams.length) {
+      const li = document.createElement('li');
+      li.className = 'teams-empty';
+      li.textContent = 'ჯერ არცერთი გუნდი არ არის რეგისტრირებული';
+      ul.appendChild(li);
+      return;
+    }
+    teams.forEach((name, i) => {
+      const li = document.createElement('li');
+      li.className = 'team-item';
+      li.textContent = (i + 1) + '. ' + name;
+      ul.appendChild(li);
+    });
+  }
+
+  function submitReg() {
+    teams.push(document.getElementById('team-name').value.trim());
+    // TODO: აქ უნდა გაიგზავნოს მონაცემები სერვერზე (fetch POST)
+    renderTeams();
+    document.querySelectorAll('.reg-body input').forEach(i => i.value = '');
+    goStep(1);
+    alert('გუნდი წარმატებით დარეგისტრირდა!');
+    window.location.hash = '#home';
+  }
+
   function openProductModal(productName) {
-    window.location.hash = '#hoodie';
+    // TODO: შეკვეთის ფორმა / მოდალი / გადახდის ბმული
     console.log('Selected product:', productName);
   }
+
+  // მცურავი ღილაკის გადათრევა
+  (function () {
+    const btn = document.getElementById('floating-hoodie');
+    let sx, sy, ox, oy, moved = false, down = false;
+    btn.addEventListener('pointerdown', e => {
+      down = true; moved = false;
+      const r = btn.getBoundingClientRect();
+      sx = e.clientX; sy = e.clientY; ox = r.left; oy = r.top;
+      btn.setPointerCapture(e.pointerId);
+    });
+    btn.addEventListener('pointermove', e => {
+      if (!down) return;
+      const dx = e.clientX - sx, dy = e.clientY - sy;
+      if (!moved && Math.hypot(dx, dy) < 6) return;
+      moved = true;
+      btn.classList.add('dragging');
+      const x = Math.min(Math.max(0, ox + dx), window.innerWidth - btn.offsetWidth);
+      const y = Math.min(Math.max(0, oy + dy), window.innerHeight - btn.offsetHeight);
+      btn.style.left = x + 'px';
+      btn.style.top = y + 'px';
+    });
+    const end = () => { down = false; btn.classList.remove('dragging'); };
+    btn.addEventListener('pointerup', end);
+    btn.addEventListener('pointercancel', end);
+    btn.addEventListener('click', e => { if (moved) { e.preventDefault(); moved = false; } });
+  })();
 
   window.addEventListener('hashchange', switchView);
   window.addEventListener('DOMContentLoaded', () => {
     renderGallery();
+    renderTeams();
     switchView();
   });
 </script>
