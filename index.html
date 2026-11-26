@@ -498,13 +498,28 @@
     border: 1px solid rgba(26,92,42,0.16);
     border-top: 4px solid var(--gold);
     border-radius: 6px;
-    padding: 24px 20px;
+    padding: 20px;
     text-align: center;
     box-shadow: 0 4px 14px rgba(0,0,0,0.04);
   }
+  .series-champ-photo {
+    width: 100%;
+    height: 190px;
+    border: 2px solid var(--gold);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 14px;
+    background: var(--off-white);
+  }
+  .series-champ-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
   .series-champ-trophy {
-    font-size: 2.2rem;
-    margin-bottom: 8px;
+    font-size: 2rem;
+    margin-bottom: 6px;
   }
   .series-champ-name {
     font-family: 'Cormorant Garamond', serif;
@@ -794,18 +809,18 @@
     </div>
   </header>
 
-  <!-- აღდგენილი მოძრავი ფოტოების ბარი -->
+  <!-- მოძრავი ფოტოების ბარი -->
   <section id="gallery" aria-label="ფოტოგალერეა">
     <div class="gallery-viewport">
       <div class="gallery-track" id="gallery-track"></div>
     </div>
   </section>
 
-  <!-- სეზონის ჩემპიონის დიდი ფოტო მოძრავი ბარის ქვემოთ -->
+  <!-- მთავარი გვერდი: სეზონის ჩემპიონის ფოტო მოძრავი ბარის ქვემოთ -->
   <section class="champion-showcase" id="champion-showcase" aria-label="სეზონის ჩემპიონი">
     <div class="champion-frame">
       <div class="champion-photo-wrap">
-        <img src="gallery2.jpg" alt="სეზონის ჩემპიონი — გუნდი მანზამბი" onerror="if(this.src.indexOf('.png')===-1){this.src='champion.png';}">
+        <img src="champion.jpg" alt="სეზონის ჩემპიონი — გუნდი მანზამბი" onerror="if(this.src.indexOf('.png')===-1){this.src='champion.png';}">
       </div>
       <div class="champion-caption">
         <span class="champion-badge">🏆 სეზონის ჩემპიონი</span>
@@ -857,11 +872,17 @@
             <h3 class="series-champions-title">2026 წლის ზამთრის სერიის ჩემპიონები</h3>
             <div class="series-champions-grid">
               <div class="series-champ-card">
+                <div class="series-champ-photo">
+                  <img src="winter_manzambi.jpg" alt="გუნდი მანზამბი" onerror="if(this.src.indexOf('.png')===-1){this.src='winter_manzambi.png';}">
+                </div>
                 <div class="series-champ-trophy">🏆</div>
                 <div class="series-champ-name">გუნდი „მანზამბი“</div>
                 <div class="series-champ-count">3 გზის ჩემპიონი</div>
               </div>
               <div class="series-champ-card">
+                <div class="series-champ-photo">
+                  <img src="winter_among_macs.jpg" alt="გუნდი among macs" onerror="if(this.src.indexOf('.png')===-1){this.src='winter_among_macs.png';}">
+                </div>
                 <div class="series-champ-trophy">🏆</div>
                 <div class="series-champ-name">გუნდი „among macs“</div>
                 <div class="series-champ-count">4 გზის ჩემპიონი</div>
@@ -889,9 +910,9 @@
           <div class="charity-banner">
             <span class="charity-banner-tag">საქველმოქმედო ინიციატივა</span>
             <p>
-              ბრენდირებული ნივთების რეალიზაციიდან შემოსული თანხა სრულად გადაირიცხება საქველმოქმედო პლატფორმა <strong>„ჩართეს“</strong> ფონდში და მოხმარდება სოციალურად დაუცველი უფროსკლასელი მოსწავლეების განათლებას — მათთვის უწყვეტი ინტერნეტისა და სასწავლო პროცესისთვის საჭირო ტექნიკის (ლეპტოპების) დაფინანსებას.
+              ბრენდირებული ნივთების გაყიდვიდან შემოსული თანხა სრულად გადაირიცხება საქველმოქმედო პლატფორმა <strong>„ჩართეს“</strong> ფონდში და მოხმარდება სოციალურად დაუცველი უფროსკლასელი მოსწავლეების განათლებას — მათთვის უწყვეტი ინტერნეტისა და სასწავლო პროცესისთვის საჭირო ნივთებისა და ტექნიკის დაფინანსებას.
             </p>
-            <a class="charity-partner-link" href="https://charte.ge" target="_blank" rel="noopener noreferrer">ჩვენი პარტნიორი: საგანმანათლებლო პლატფორმა „ჩართე“ (charte.ge) ↗</a>
+            <a class="charity-partner-link" href="https://charte.ge" target="_blank" rel="noopener noreferrer">ჩვენი პარტნიორი: ორგანიზაცია „ჩართე“ (charte.ge) ↗</a>
           </div>
 
           <div class="merch-grid">
@@ -993,15 +1014,13 @@
 </div>
 
 <script>
-  // ჩასვით თქვენი ფოტოების ფაილების სახელები (მაგ.: 'g1.jpg', 'g2.jpg'...)
   const GALLERY_IMAGES = [
-    'photo1.jpg',
-    'photo2.jpg',
-    'photo3.jpg',
-    'photo4.jpg',
-    'photo5.jpg',
+    'gallery1.jpg',
     'gallery2.jpg',
-    'gallery3.jpg'
+    'gallery3.jpg',
+    'gallery4.jpg',
+    'gallery5.jpg',
+    'gallery6.jpg'
   ];
 
   function renderGallery() {
